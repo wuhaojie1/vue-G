@@ -4,36 +4,43 @@
         <div class="text-center">
             <form class="form-signin">
                 <h1 class="h3 mb-3 font-weight-normal">Please Login</h1>
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email address"
-                       v-model="loginData.email"
+                <input id="inputEmail" class="form-control" placeholder="username"
+                       v-model="loginForm.name"
                        required autofocus>
                 <input type="password" id="inputPassword" class="form-control" placeholder="Password"
-                       v-model="loginData.password"
+                       v-model="loginForm.password"
                        required>
                 <div class="checkbox mb-3">
                     <label>
-                        <input type="checkbox" value="remember-me"> Remember me
+                        <el-checkbox v-model="loginForm.rememberMe"> Remember me</el-checkbox>
                     </label>
                 </div>
-                <button class="btn btn-lg btn-primary btn-block" @click="login">Login</button>
+                <!--                <button class="btn btn-lg btn-primary btn-block" @click="handleLogin">Login</button>-->
+                <div @click="handleLogin">Login</div>
                 <a class="nav-link" href="/Register">To Register</a>
-                <p class="mt-5 mb-3 text-muted">&copy; 2018-2019</p>
+                <p class="mt-5 mb-3 text-muted">&copy; 2019-2020</p>
             </form>
         </div>
     </section>
 </template>
 
 <script>
-    import NavBarOne from "./NavBarOne";
+    // import {encrypt} from '@/assets/js/rsaEncrypt'
+    // import {login} from '@/assets/js/Login'
+    import NavBarOne from "./NavBarOne"
+    import Cookies from 'js-cookie'
+    // import Config from '@/settings'
+    // import request from '@/assets/js/request';
 
     export default {
         name: "login",
         components: {NavBarOne},
         data() {
             return {
-                loginData: {
-                    email: 'root@phpvue.com',
-                    password: '123456'
+                loginForm: {
+                    name: 'admin',
+                    password: '123456',
+                    rememberMe: false,
                 },
             }
         },
@@ -42,7 +49,18 @@
                 this.$axios.post(`${this.$root.baseURL}/login`, this.loginData).then(function (res) {
                     console.log(res);
                 })
-            }
+            },
+            handleLogin() {
+                let postData = this.loginForm;
+                this.axios({
+                    url: "login",
+                    method: "post",
+                    params: JSON.stringify(postData)
+                }).then(data => {
+                    debugger
+                    console.log(data)
+                });
+            },
         }
 
     }
