@@ -83,7 +83,7 @@ const http = ({
                 method: method || 'post',
                 responseType: responseType || '',
             }).then((data) => {
-                debugger
+                // debugger
                 // console.log(data.data)
                 // if (data.data.code) {
                 // if (data.data.code.toString() === '-1') {
@@ -95,23 +95,20 @@ const http = ({
                 //   if (data.data.code.toString() === '0') {
                 //     // bus.$emit('tip', {text: data.data.msg, type: 'error'});
                 // }
-                if (data.config.responseType === 'blob') {
-                    resolve(data.data)
-                } else if (data.data.code.toString() === '0') {
-                    bus.$emit('tip', {text: data.data.msg, type: 'error'});
-                } else if (data.data.code.toString() === '-1') {
-
-                    // bus.$emit('tip', {text: "未登录！请先登录", type: 'error'});
-                    // router.push('/login')
-                    // isLogin = false
-                } else {
-                    console.log(data);
-                    resolve(data);
-                }
-
-                // }else{
-
+                // if (data.config.responseType === 'blob') {
+                //     resolve(data.data)
+                // } else if (data.data.code.toString() === '0') {
+                //     bus.$emit('tip', {text: data.data.msg, type: 'error'});
+                // } else if (data.data.code.toString() === '-1') {
+                //
+                //     // bus.$emit('tip', {text: "未登录！请先登录", type: 'error'});
+                //     // router.push('/login')
+                //     // isLogin = false
+                // } else {
+                //     console.log(data);
+                //     resolve(data);
                 // }
+                resolve(data);
 
             }).catch((err) => {
                 reject(err);

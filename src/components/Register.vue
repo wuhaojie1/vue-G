@@ -5,11 +5,21 @@
         <div class="text-center">
             <form class="form-register">
                 <h1 class="h3 mb-3 font-weight-normal">Please register</h1>
+
+                <label for="inputName" class="sr-only">Name</label>
+                <input type="name" id="inputName" class="form-control" placeholder="Name" v-model="registerForm.name"
+                       required autofocus>
+
                 <label for="inputEmail" class="sr-only">Email address</label>
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                <input type="email" id="inputEmail" class="form-control" placeholder="Email address"
+                       v-model="registerForm.email" required>
+
                 <label for="inputPassword" class="sr-only">Password</label>
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+                <input type="password" id="inputPassword" class="form-control" placeholder="Password"
+                       v-model="registerForm.password" required>
+
+                <div class="btn btn-lg btn-primary btn-block" type="submit" @click="register">Register</div>
+
                 <p class="mt-5 mb-3 text-muted">&copy; 2018-2019</p>
             </form>
         </div>
@@ -21,7 +31,32 @@
 
     export default {
         name: "login",
-        components: {NavBarOne}
+        components: {NavBarOne},
+        data() {
+            return {
+                registerForm: {
+                    name: '',
+                    email: '',
+                    password: '',
+                },
+            }
+        },
+        methods: {
+            register() {
+                let postData = this.registerForm;
+                this.axios({
+                    url: "api/register",
+                    method: "post",
+                    params: JSON.stringify(postData)
+                }).then(res => {
+                    // debugger
+                    // console.log(data)
+                    if (res.data.success) {
+                        this.$router.push('/login')
+                    }
+                });
+            }
+        }
     }
 </script>
 
@@ -71,14 +106,20 @@
 
     .form-register input[type="email"] {
         margin-bottom: -1px;
-        border-bottom-right-radius: 0;
-        border-bottom-left-radius: 0;
+        border-radius: 0;
     }
 
     .form-register input[type="password"] {
         margin-bottom: 10px;
         border-top-left-radius: 0;
         border-top-right-radius: 0;
+    }
+
+    .form-register input[type="name"] {
+        margin-bottom: -1px;
+        /*margin-bottom: 10px;*/
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
     }
 
 </style>

@@ -1,10 +1,11 @@
 <template>
     <div class="index-outline">
         <!--导航栏1-->
-        <nav-bar-one/>
+        <!--<nav-bar-one/>-->
         <!--导航栏2-->
-        <nav-bartwo class="sticky-top"/>
+        <!--<nav-bartwo class="sticky-top"/>-->
         <!--上新-->
+        <header></header>
         <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
             <div class="col-md-5 p-lg-5 mx-auto my-5">
                 <h1 class="display-4 font-weight-normal">{{dsp4}}</h1>
@@ -86,13 +87,14 @@
 <script>
     import {WOW} from 'wowjs';
     import Footer from "../components/Footer";
+    import header from "../components/header";
     import NavBartwo from "../components/NavBartwo";
     import NavBarOne from "../components/NavBarOne";
 
 
     export default {
         name: "index",
-        components: {NavBarOne, NavBartwo, Footer},
+        components: {NavBarOne, NavBartwo, Footer, header},
         data() {
             return {
                 dsp4: "TECH SUPPORT TO YOUR DOOR",

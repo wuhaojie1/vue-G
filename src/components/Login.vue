@@ -5,7 +5,7 @@
             <form class="form-signin">
                 <h1 class="h3 mb-3 font-weight-normal">Please Login</h1>
                 <input id="inputEmail" class="form-control" placeholder="username"
-                       v-model="loginForm.name"
+                       v-model="loginForm.email"
                        required autofocus>
                 <input type="password" id="inputPassword" class="form-control" placeholder="Password"
                        v-model="loginForm.password"
@@ -16,7 +16,7 @@
                     </label>
                 </div>
                 <!--                <button class="btn btn-lg btn-primary btn-block" @click="handleLogin">Login</button>-->
-                <div @click="handleLogin">Login</div>
+                <div class="btn btn-lg btn-primary btn-block" @click="handleLogin">Login</div>
                 <a class="nav-link" href="/Register">To Register</a>
                 <p class="mt-5 mb-3 text-muted">&copy; 2019-2020</p>
             </form>
@@ -38,8 +38,8 @@
         data() {
             return {
                 loginForm: {
-                    name: 'admin',
-                    password: '123456',
+                    email: '1191125750@qq.com',
+                    password: '111111',
                     rememberMe: false,
                 },
             }
@@ -53,11 +53,11 @@
             handleLogin() {
                 let postData = this.loginForm;
                 this.axios({
-                    url: "login",
+                    url: "api/login",
                     method: "post",
                     params: JSON.stringify(postData)
                 }).then(data => {
-                    debugger
+                    // debugger
                     console.log(data)
                 });
             },
