@@ -76,6 +76,8 @@
         width: 100vw;
         height: 100vh;
         background: rgba(0, 0, 0, 0.4);
+        position: absolute;
+        z-index: 100;
 
         .search-box {
             /*position: absolute;*/

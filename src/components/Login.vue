@@ -45,11 +45,11 @@
             }
         },
         methods: {
-            login() {
+            /*login() {
                 this.$axios.post(`${this.$root.baseURL}/login`, this.loginData).then(function (res) {
                     console.log(res);
                 })
-            },
+            },*/
             handleLogin() {
                 let postData = this.loginForm;
                 this.axios({

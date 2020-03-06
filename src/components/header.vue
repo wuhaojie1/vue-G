@@ -1,22 +1,37 @@
 <template>
     <div id="nav-header" :class="curtain === true ? 'nav-header nav-header-active' : 'nav-header' ">
+
         <div class="header-menu" v-show="!curtain">
             <div class="menu-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                     class="d-block mb-2 svgClass">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="14.31" y1="8" x2="20.05" y2="17.94"></line>
+                    <line x1="9.69" y1="8" x2="21.17" y2="8"></line>
+                    <line x1="7.38" y1="12" x2="13.12" y2="2.06"></line>
+                    <line x1="9.69" y1="16" x2="3.95" y2="6.06"></line>
+                    <line x1="14.31" y1="16" x2="2.83" y2="16"></line>
+                    <line x1="16.62" y1="12" x2="10.88" y2="21.94"></line>
+                </svg>
+                <a class="svgText" href="/">SmartHome</a>
+            </div>
+            <!--<div class="menu-item">
                 <router-link to="../homepage">
                     <div class="menu-item-text">主页</div>
                 </router-link>
+            </div>-->
+            <div class="menu-item">
+                <div class="menu-item-text">上新</div>
             </div>
             <div class="menu-item">
-                <div class="menu-item-text">推荐</div>
+                <div class="menu-item-text">购物袋</div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-text">账户</div>
             </div>
             <div class="menu-item">
                 <div class="menu-item-text">通知</div>
-            </div>
-            <div class="menu-item">
-                <div class="menu-item-text">购物车</div>
-            </div>
-            <div class="menu-item">
-                <div class="menu-item-text">我的</div>
             </div>
             <div class="menu-item search-item" @click="tosearch">
                 <!--<a id="ac-gn-link-search" class="ac-gn-link ac-gn-link-search" href="/cn/search"
@@ -100,6 +115,22 @@
                     width: 22px;
                     height: 22px;
                     margin: 0 10px;
+                }
+
+                .svgClass {
+                    color: dodgerblue;
+                    float: left;
+                    margin-top: 9px;
+                    margin-right: 10px;
+                }
+
+                .svgText {
+                    float: left;
+                    color: #f5f5f7;
+                    font-weight: 400;
+                    opacity: .8;
+                    /*outline-offset: -7px;*/
+                    font-family: "SF Pro SC", "HanHei SC", "SF Pro Text", "Myriad Set Pro", "SF Pro Icons", "PingFang SC", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
                 }
             }
 
