@@ -19,7 +19,8 @@
                         <div class="goods-detail-summary">
                             <div class="goods-basic-msg">
                                 <div class="goods-name">16 英寸 MacBook Pro - 深空灰色</div>
-                                <div class="goods-number">1个</div>
+                                <el-input-number v-model="num" :min="1" :max="10"
+                                                 label="描述文字" size="mini"></el-input-number>
                                 <div class="goods-price">RMB 17,399</div>
                             </div>
                             <div class="goods-detail-msg">
@@ -165,6 +166,7 @@
                     '配件套件',
                 ],
                 showgoods: false,
+                num: '',
                 value: [],
                 options: [
                     {
@@ -480,7 +482,7 @@
                                 display: flex;
                                 justify-content: space-between;
                                 font-size: 24px;
-                                line-height: 1.16667;
+                                line-height: 26px;
                                 font-weight: 600;
                                 letter-spacing: .009em;
                                 font-family: SF Pro Display, SF Pro Icons, AOS Icons, Helvetica Neue, Helvetica, Arial, sans-serif;
