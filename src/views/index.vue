@@ -89,7 +89,7 @@
     import Footer from "../components/Footer";
     import NavBartwo from "../components/NavBartwo";
     import NavBarOne from "../components/NavBarOne";
-    import Header from "../components/header";
+    import Header from "../components/header/header";
 
 
     export default {

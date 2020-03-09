@@ -2,12 +2,12 @@
     <div id="search" @click="searchClose" v-show="curtain">
         <div class="search-box">
             <div class="search-box-inputBox">
-                <img src="../assets/img/header/search.png" class="search-img" @click="search">
+                <img src="../../assets/img/header/search.png" class="search-img" @click="search">
                 <input class="search-input"
                        :placeholder="placeholderText"
                        @click="inputClick"
                        v-model="inputText"/>
-                <img src="../assets/img/header/close.png" class="close-img" @click="searchClose">
+                <img src="../../assets/img/header/close.png" class="close-img" @click="searchClose">
             </div>
             <div class="search-box-listBox">
                 <div class="search-results">
@@ -31,7 +31,7 @@
 </template>
 
 <script>
-    import {stopEventBubble} from '../assets/js/common';
+    import {stopEventBubble} from '../../assets/js/common';
 
     export default {
         name: "search",

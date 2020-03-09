@@ -22,27 +22,27 @@
                 </router-link>
             </div>-->
             <div class="menu-item">
-                <div class="menu-item-text">上新</div>
+                <div class="menu-item-text" @click="toPage('/')">上新</div>
             </div>
             <div class="menu-item">
-                <div class="menu-item-text">购物袋</div>
+                <div class="menu-item-text" @click="toPage('/shoppingBag')">购物袋</div>
             </div>
             <div class="menu-item">
-                <div class="menu-item-text">账户</div>
+                <div class="menu-item-text" @click="toPage('/')">账户</div>
             </div>
             <div class="menu-item">
-                <div class="menu-item-text">通知</div>
+                <div class="menu-item-text" @click="toPage('/')">通知</div>
             </div>
             <div class="menu-item search-item" @click="tosearch">
                 <!--<a id="ac-gn-link-search" class="ac-gn-link ac-gn-link-search" href="/cn/search"
                    data-analytics-title="search" data-analytics-click="search" data-analytics-intrapage-link=""
                    aria-label="搜索 apple.com.cn" role="button" aria-haspopup="true"></a>-->
                 <!--<div class="menu-item-text">购物车</div>-->
-                <img class="search-image" src="../assets/img/header/search.png">
+                <img class="search-image" src="../../assets/img/header/search.png">
             </div>
         </div>
-        <search :show="curtain"
-                @changeEvent="changeEvent"/>
+        <search :show="curtain" @changeEvent="changeEvent"/>
+
     </div>
 </template>
 
@@ -72,6 +72,9 @@
             changeEvent(curtain) {
                 this.curtain = curtain
             },
+            toPage(path) {
+                this.$router.push(path)
+            }
         }
     }
 </script>
@@ -118,7 +121,7 @@
                 }
 
                 .svgClass {
-                    color: dodgerblue;
+                    color: #f5f7fa;
                     float: left;
                     margin-top: 9px;
                     margin-right: 10px;

@@ -8,7 +8,8 @@ import ThirdDetail from './views/ThirdDetail'
 import UserInfo from './components/UserInfo'
 import Comment from './components/Comment'
 import Standard from './components/Standard'
-import shoppingCart from './views/shoppingCart'
+// import shoppingCart from './views/shoppingCart'
+import shoppingBag from './views/shopping/shoppingBag'
 
 
 Vue.use(Router);
@@ -29,6 +30,7 @@ export default new Router({
             ]
         },
         {path: '/UserInfo', name: 'UserInfo', component: UserInfo,},
-        {path: '/shoppingCart', name: 'shoppingCart', component: shoppingCart},
+        {path: '/shoppingBag', name: 'shoppingBag', component: shoppingBag,},
+        // {path: '/shoppingCart', name: 'shoppingCart', component: shoppingCart},
     ]
 })

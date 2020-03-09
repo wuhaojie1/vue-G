@@ -1,6 +1,6 @@
 import axios from 'axios';
 // import api from '@/api/http/api';
-import bus from './bus';
+// import bus from './bus';
 // import {getCookie} from '../cookie';
 // import router from '../../router/router'
 import api from './api';

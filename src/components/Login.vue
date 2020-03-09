@@ -51,7 +51,10 @@
                 })
             },*/
             handleLogin() {
-                let postData = this.loginForm;
+                // let postData = this.loginForm;
+                let postData = {
+                    ...this.loginForm
+                };
                 this.axios({
                     url: "api/login",
                     method: "post",
