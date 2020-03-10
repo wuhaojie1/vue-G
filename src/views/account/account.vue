@@ -27,7 +27,7 @@
         name: "account",
         components: {
             NavLeftContainer,
-            Header,
+            Header
         },
         created() {
             this.$router.push('/account/personal')
@@ -115,6 +115,7 @@
 
                 .router-view {
                     margin-left: 340px;
+                    margin-bottom: 60px;
                 }
             }
 

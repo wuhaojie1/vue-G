@@ -1,7 +1,7 @@
 audio, body, button, canvas, dd, div, dl, dt, fieldset, figure, form, h1, h2, h3, h4, h5, h6, html, input, legend, li, ol, optgroup, p, progress, select, span, table, td, textarea, th, ul, video {
     margin: 0;
     padding: 0;
-    font-weight: 300;
+    font-weight: 400;
 }
 
 i, del, s, u, em {
@@ -503,5 +503,9 @@ input:-ms-input-placeholder { /* Internet Explorer 10+ */
 .center-vh, .flex-center {
     -webkit-box-align: center;
     align-items: center;
+}
+
+.uc-warp {
+    margin-top: 20px;
 }
 

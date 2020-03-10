@@ -1,13 +1,7 @@
 <template>
     <div id="order">
         <div class="headline-nav-container">
-            <div class="user-nav">
-                <div class="text-black flex">
-                    <div>
-                        <a href="#/" class="text-base">我的订单</a>
-                    </div>
-                </div>
-            </div>
+            <UserNave :userNaveData="userNaveData"></UserNave>
             <div class="uc-warp">
                 <div class="order-container">
                     <div class="order-empty-container flex">
@@ -22,10 +16,19 @@
 </template>
 
 <script>
+    import UserNave from "../../components/accout/userNave";
     export default {
         name: "order",
+        components: {UserNave},
         data() {
-            return {}
+            return {
+                userNaveData: [
+                    {
+                        path: '#',
+                        name: '我的订单',
+                    }
+                ],
+            }
         },
         methods: {}
 
@@ -38,29 +41,7 @@
             position: relative;
             margin-bottom: 20px;
 
-            .user-nav {
-                padding: 18px 30px;
-                box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .1);
-                background-color: #fff;
-
-                .text-black {
-                    -webkit-box-pack: justify;
-                    justify-content: space-between;
-
-                    .text-base {
-                        display: inline;
-                        margin-right: 14px;
-                        cursor: pointer;
-                        font-size: 16px;
-                        line-height: 1.5;
-                        color: #101920;
-                        background-color: transparent;
-                    }
-                }
-            }
-
             .uc-warp {
-                margin-top: 20px;
 
                 .order-container {
                     background-color: #fff;
