@@ -1,7 +1,7 @@
 <template>
     <section>
-        <nav-bar-one/>
-
+        <!--<nav-bar-one/>-->
+        <Header></Header>
         <div class="text-center">
             <form class="form-register">
                 <h1 class="h3 mb-3 font-weight-normal">Please register</h1>
@@ -27,11 +27,13 @@
 </template>
 
 <script>
-    import NavBarOne from "./NavBarOne";
-
+    // import NavBarOne from "./NavBarOne";
+    import Header from "./header/header"
     export default {
         name: "login",
-        components: {NavBarOne},
+        components: {
+            Header,
+        },
         data() {
             return {
                 registerForm: {

@@ -73,8 +73,8 @@
 
 <style lang="less" scoped>
     #search {
-        width: 100vw;
-        height: 100vh;
+        width: 100%;
+        height: 100%;
         background: rgba(0, 0, 0, 0.4);
         position: absolute;
         z-index: 100;

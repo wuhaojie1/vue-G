@@ -387,6 +387,7 @@
             width: 980px;
             margin: 0 auto;
             padding-top: 64px;
+            margin-bottom: 100px;
 
             .body-money {
                 text-align: center;

@@ -28,7 +28,7 @@
                 <div class="menu-item-text" @click="toPage('/shoppingBag')">购物袋</div>
             </div>
             <div class="menu-item">
-                <div class="menu-item-text" @click="toPage('/')">账户</div>
+                <div class="menu-item-text" @click="toPage('/account')">账户</div>
             </div>
             <div class="menu-item">
                 <div class="menu-item-text" @click="toPage('/')">通知</div>

@@ -1,6 +1,7 @@
 <template>
     <section>
-        <nav-bar-one/>
+        <!--<nav-bar-one/>-->
+        <Header></Header>
         <div class="text-center">
             <form class="form-signin">
                 <h1 class="h3 mb-3 font-weight-normal">Please Login</h1>
@@ -28,13 +29,19 @@
     // import {encrypt} from '@/assets/js/rsaEncrypt'
     // import {login} from '@/assets/js/Login'
     import NavBarOne from "./NavBarOne"
+    import Header from "./header/header"
     import Cookies from 'js-cookie'
     // import Config from '@/settings'
     // import request from '@/assets/js/request';
 
     export default {
         name: "login",
-        components: {NavBarOne},
+
+        components: {
+            NavBarOne,
+            Header
+        },
+
         data() {
             return {
                 loginForm: {

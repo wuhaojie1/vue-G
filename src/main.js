@@ -8,6 +8,7 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import 'wowjs/css/libs/animate.css';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import './assets/css/common.css';
 import axios from '@/api/axios';
 import api from '@/api/api';
 
