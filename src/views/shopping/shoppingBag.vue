@@ -10,7 +10,11 @@
                 </div>
             </div>
             <div class="body-goods">
-                <div class="goods-detail">
+                <GoodsDetailCard
+                        :goodsData="goodsData"
+                        @changeGoodsStatus="changeGoodsStatus"
+                ></GoodsDetailCard>
+                <!--<div class="goods-detail">
                     <div class="goods-detail-left">
                         <img class="goods-detail-img"
                              src="https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/mbp16touch-space-select-201911_GEO_CN?wid=800&hei=800&fmt=jpeg&qlt=80&op_usm=0.5,1.5&fit=constrain&.v=1572654981479">
@@ -118,7 +122,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>-->
             </div>
             <div class="goods-settle-account">
                 <div class="goods-settle-right">
@@ -147,35 +151,37 @@
     import NavBarOne from "../../components/NavBarOne";
     import NavBartwo from "../../components/NavBartwo";
     import Footer from "../../components/Footer";
+    import GoodsDetailCard from "../../components/shopping/goodsDetailCard";
 
     export default {
         name: "shoppingBag",
-        components: {Header},
+        components: {GoodsDetailCard, Header},
         data() {
             return {
                 money: '26,098',
-                goodsDetailMsg: [
-                    '2.4GHz 8 核第九代 Intel Core i9 处理器，Turbo Boost 最高可达 5.0GHz',
-                    '64GB 2666MHz DDR4 内存',
-                    'AMD Radeon Pro 5300M 图形处理器，配备 4GB GDDR6 显存',
-                    '512GB 固态硬盘',
-                    '采用原彩显示技术的 16 英寸视网膜显示屏',
-                    '四个雷雳 3 端口',
-                    '触控栏和触控 ID',
-                    '背光键盘 - 中文 (拼音)',
-                    '配件套件',
-                ],
-                showgoods: false,
-                num: '',
+                // goodsDetailMsg: [
+                //     '2.4GHz 8 核第九代 Intel Core i9 处理器，Turbo Boost 最高可达 5.0GHz',
+                //     '64GB 2666MHz DDR4 内存',
+                //     'AMD Radeon Pro 5300M 图形处理器，配备 4GB GDDR6 显存',
+                //     '512GB 固态硬盘',
+                //     '采用原彩显示技术的 16 英寸视网膜显示屏',
+                //     '四个雷雳 3 端口',
+                //     '触控栏和触控 ID',
+                //     '背光键盘 - 中文 (拼音)',
+                //     '配件套件',
+                // ],
+
                 value: [],
-                options: [
+                /*options: [
                     {
                         value: 'zhinan',
                         label: '指南',
-                        children: [{
+                        children: [
+                        {
                             value: 'shejiyuanze',
                             label: '设计原则',
-                            children: [{
+                            children: [
+                            {
                                 value: 'yizhi',
                                 label: '一致'
                             }, {
@@ -188,7 +194,8 @@
                                 value: 'kekong',
                                 label: '可控'
                             }]
-                        }, {
+                        },
+                        {
                             value: 'daohang',
                             label: '导航',
                             children: [{
@@ -366,12 +373,66 @@
                             value: 'jiaohu',
                             label: '组件交互文档'
                         }]
-                    }]
+                    }],*/
+                goodsData: [
+                    {
+                        imgSrc: 'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/mbp16touch-space-select-201911_GEO_CN?wid=800&hei=800&fmt=jpeg&qlt=80&op_usm=0.5,1.5&fit=constrain&.v=1572654981479',
+                        goodsName: '16 英寸 MacBook Pro - 深空灰色',
+                        num: 1,
+                        price: 'RMB 17,399',
+                        showgoods: false,
+                        goodsDetail: [
+                            {
+                                goodsTitle: '硬件',
+                                goodsDetailMsg: [
+                                    '2.4GHz 8 核第九代 Intel Core i9 处理器，Turbo Boost 最高可达 5.0GHz',
+                                    '64GB 2666MHz DDR4 内存',
+                                    'AMD Radeon Pro 5300M 图形处理器，配备 4GB GDDR6 显存',
+                                    '512GB 固态硬盘',
+                                    '采用原彩显示技术的 16 英寸视网膜显示屏',
+                                    '四个雷雳 3 端口',
+                                    '触控栏和触控 ID',
+                                    '背光键盘 - 中文 (拼音)',
+                                    '配件套件',
+                                ],
+                            }
+                        ],
+                        goodsAddress: [],
+                        deliveryTime: '1-2 周发货。'
+                    },
+                    {
+                        imgSrc: 'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/mbp16touch-space-select-201911_GEO_CN?wid=800&hei=800&fmt=jpeg&qlt=80&op_usm=0.5,1.5&fit=constrain&.v=1572654981479',
+                        goodsName: '16 英寸 MacBook Pro - 深空灰色',
+                        num: 1,
+                        price: 'RMB 17,399',
+                        showgoods: false,
+                        goodsDetail: [
+                            {
+                                goodsTitle: '硬件',
+                                goodsDetailMsg: [
+                                    '2.4GHz 8 核第九代 Intel Core i9 处理器，Turbo Boost 最高可达 5.0GHz',
+                                    '64GB 2666MHz DDR4 内存',
+                                    'AMD Radeon Pro 5300M 图形处理器，配备 4GB GDDR6 显存',
+                                    '512GB 固态硬盘',
+                                    '采用原彩显示技术的 16 英寸视网膜显示屏',
+                                    '四个雷雳 3 端口',
+                                    '触控栏和触控 ID',
+                                    '背光键盘 - 中文 (拼音)',
+                                    '配件套件',
+                                ],
+                            }
+                        ],
+                        goodsAddress: [],
+                        deliveryTime: '1-2 周发货。'
+                    }
+                ],
             }
         },
         methods: {
-            changeGoodsStatus(showgoods) {
-                this.showgoods = !showgoods
+            changeGoodsStatus(item, index) {
+                console.log(item);
+                console.log(index);
+                this.goodsData[index].showgoods = !item.showgoods
             }
         }
     }

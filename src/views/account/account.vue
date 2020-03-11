@@ -21,7 +21,7 @@
 
 <script>
     import Header from "../../components/header/header"
-    import NavLeftContainer from "./navLeftContainer";
+    import NavLeftContainer from "../../components/accout/navLeftContainer";
 
     export default {
         name: "account",
