@@ -150,9 +150,7 @@
 
 <script>
     import Header from "../../components/header/header"
-    import NavBarOne from "../../components/NavBarOne";
-    import NavBartwo from "../../components/NavBartwo";
-    import Footer from "../../components/Footer";
+    // import Footer from "../../components/Footer";
     import GoodsDetailCard from "../../components/shopping/goodsDetailCard";
 
     export default {

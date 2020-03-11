@@ -28,9 +28,8 @@
 <script>
     // import {encrypt} from '@/assets/js/rsaEncrypt'
     // import {login} from '@/assets/js/Login'
-    import NavBarOne from "./NavBarOne"
     import Header from "./header/header"
-    import Cookies from 'js-cookie'
+    // import Cookies from 'js-cookie'
     // import Config from '@/settings'
     // import request from '@/assets/js/request';
 
@@ -38,7 +37,6 @@
         name: "login",
 
         components: {
-            NavBarOne,
             Header
         },
 
@@ -68,7 +66,7 @@
                     params: JSON.stringify(postData)
                 }).then(data => {
                     // debugger
-                    console.log(data)
+                    window.console.log(data)
                 });
             },
         }

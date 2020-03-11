@@ -9,11 +9,11 @@
             </h4>
         </div>
         <div class="nav-left">
-            <div class="nav-group" v-for="item in navData">
+            <div class="nav-group" v-for="(item, index) in navData" :key="index">
                 <div class="nav-title" v-if="item.title">
                     {{item.title}}
                 </div>
-                <div class="nav-item" v-for="nameItem in item.names" @click="topage(nameItem)">
+                <div class="nav-item" v-for="(nameItem,index) in item.names" :key="index" @click="topage(nameItem)">
                     <div class="nav-link">{{nameItem.name}}</div>
                 </div>
 
@@ -29,11 +29,12 @@
         props: {
             navData: {
                 type: Array,
-                default: [],
+                default: () => [],
             },
             userMsg: {
                 type: Object,
-                default: {},
+                default: () => {
+                },
             }
         },
         data() {

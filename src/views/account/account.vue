@@ -29,7 +29,7 @@
             NavLeftContainer,
             Header
         },
-        created() {
+        mounted() {
             this.$router.push('/account/personal')
         },
         data() {

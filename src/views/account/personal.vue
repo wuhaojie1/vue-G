@@ -19,7 +19,7 @@
                                 <!--<div class="text-center">上传图片</div>-->
                             </div>
                             <div class="basic-info">
-                                <div class="item" v-for="item in userBasicInfoData">
+                                <div class="item" v-for="(item,index) in userBasicInfoData" :key="index">
                                     <div class="item-text">
                                         <div class="username-title">{{item.nameTitle}}</div>
                                     </div>
@@ -39,7 +39,7 @@
                                 <div class="security-info-tip">安全信息是绝对保密的，我们不会透露给任何人</div>
                             </div>
                             <div class="basic-info">
-                                <div class="item" v-for="item in userSecurityInfoData">
+                                <div class="item" v-for="(item,index) in userSecurityInfoData" :key="index">
                                     <div class="item-text">
                                         <div class="username-title">{{item.nameTitle}}</div>
                                     </div>

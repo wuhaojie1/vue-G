@@ -110,12 +110,11 @@
 </template>
 
 <script>
-    import NavBarOne from "../components/NavBarOne";
     import Footer from "../components/Footer";
 
     export default {
         name: "shoppingCart",
-        components: {Footer, NavBarOne},
+        components: {Footer},
         data() {
             return {
                 producer1: '美的',

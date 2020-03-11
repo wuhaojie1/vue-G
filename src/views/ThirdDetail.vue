@@ -55,11 +55,10 @@
 
 <script>
     import Footer from "../components/Footer";
-    import NavBarOne from "../components/NavBarOne";
 
     export default {
         name: "ThirdDetail",
-        components: {NavBarOne, Footer},
+        components: {Footer},
         data() {
             return {
                 cardtitle: 'New',

@@ -1,6 +1,6 @@
 <template>
     <div id="goodsDetailCard">
-        <div class="goods-detail" v-for="(item,index) in goodsData">
+        <div class="goods-detail" v-for="(item,index) in goodsData" :key="index">
             <div class="goods-detail-left">
                 <img class="goods-detail-img" :src="item.imgSrc">
             </div>
@@ -20,9 +20,11 @@
                         <div class="goods-detail-del goods-detail-hoverText" @click="deleteGoods(index)">移除</div>
                     </div>
                     <el-collapse-transition>
-                        <div class="goods-detail-showing" v-show="item.showgoods" v-for="goodsItem in item.goodsDetail">
+                        <div class="goods-detail-showing" v-show="item.showgoods"
+                             v-for="(goodsItem,index) in item.goodsDetail" :key="index">
                             <div class="goods-detail-showing-title">{{goodsItem.goodsTitle}}</div>
-                            <ul class="goods-detail-showing-ul" v-for="itemDetailMsg in goodsItem.goodsDetailMsg">
+                            <ul class="goods-detail-showing-ul"
+                                v-for="(itemDetailMsg,index) in goodsItem.goodsDetailMsg" :key="index">
                                 <li class="goods-detail-showing-li">{{itemDetailMsg}}</li>
                             </ul>
                         </div>
@@ -63,7 +65,7 @@
         props: {
             goodsData: {
                 type: Array,
-                default: [],
+                default: () => []
             }
         },
         data() {

@@ -14,6 +14,7 @@ import account from './views/account/account'
 import order from './views/account/order'
 import personal from './views/account/personal'
 import shippingAddress from './views/account/shippingAddress'
+import newAddress from './views/account/newAddress'
 
 
 Vue.use(Router);
@@ -40,7 +41,13 @@ export default new Router({
             children: [
                 {path: '/account/order', name: 'order', component: order},
                 {path: '/account/personal', name: 'personal', component: personal},
-                {path: '/account/shippingAddress', name: 'shippingAddress', component: shippingAddress},
+                {
+                    path: '/account/shippingAddress', name: 'shippingAddress', component: shippingAddress,
+                    children: [
+                        {path: '/account/shippingAddress/newAddress', name: 'newAddress', component: newAddress},
+                    ]
+                },
+
             ]
         },//账户
         // {path: '/shoppingCart', name: 'shoppingCart', component: shoppingCart},

@@ -1,28 +1,31 @@
 <template>
     <div id="shippingAddress">
         <div class="address-template">
-            <UserNave :userNaveData="userNaveData"></UserNave>
-            <div class="address-card-list-wrap uc-warp">
+            <UserNave :userNaveData="userNaveData"
+                      @back="back"></UserNave>
+            <div class="address-card-list-wrap uc-warp" v-if="userNaveData.length===1">
                 <ul class="address-card-list clearfix">
-                    <li class="address-card">
+                    <li class="address-card" v-for="(item,index) in addressData" :key="index">
                         <input id="account-account1-2873038"
                                type="radio"
                                name="selectedAddress-account1"
                                class=""
                                value="2873038">
                         <label for="account-account1-2873038">
-                            <span class="default isdefault">默认</span>
-                            <p title="巫**" class="receiver name">巫**</p>
-                            <p title="四川省 内江市" class="region">四川省 内江市</p>
-                            <p title="隆昌县 ********" class="area">隆昌县 ********</p>
-                            <p title="********" class="street">********</p>
-                            <p title="Tel: 152****708" class="mobile">电话: 152****708</p>
+                            <span class="default isdefault" v-if="item.isDefault">默认</span>
+                            <p class="receiver name">{{item.name}}</p>
+                            <p class="region">{{item.region}}</p>
+                            <p class="area">{{item.area}}</p>
+                            <p class="street">{{item.street}}</p>
+                            <p class="mobile">电话:{{item.mobile}}</p>
                             <div class="btns-box">
-                                <a href="javascript:void(0)" class="text-blue disabled">默认地址</a>
+                                <div :class="item.isDefault?'text-blue disabled':'text-blue'"
+                                     @click="setDefault(item.isDefault)">默认地址
+                                </div>
                                 <span>|</span>
-                                <a href="javascript:void(0)" class="text-blue">删除</a>
+                                <div class="text-blue" @click="delAddress">删除</div>
                                 <span>|</span>
-                                <a href="javascript:void(0)" class="text-blue">修改</a>
+                                <div class="text-blue" @click="updateAddress">修改</div>
                             </div>
                         </label>
                     </li>
@@ -31,7 +34,7 @@
                                type="radio"
                                name="selectedAddress-account1"
                                value="0">
-                        <label for="account-account1-0">
+                        <label for="account-account1-0" @click="newAddress">
                             <div><i class="plus"></i>
                                 <span>新增地址</span>
                             </div>
@@ -39,12 +42,14 @@
                     </li>
                 </ul>
             </div>
+            <router-view></router-view>
         </div>
     </div>
 </template>
 
 <script>
     import UserNave from "../../components/accout/userNave";
+    import newAddress from "./newAddress";
 
     export default {
         name: "shippingAddress",
@@ -60,10 +65,53 @@
                         path: '',
                         name: '新增地址',
                     },*/
-                ]
+                ],
+                addressData: [
+                    {
+                        isDefault: true,
+                        name: '巫浩洁',
+                        region: '四川省 内江市',
+                        area: '隆昌县 ********',
+                        street: '********',
+                        mobile: '15282148708'
+                    },
+                    {
+                        isDefault: false,
+                        name: '巫浩洁',
+                        region: '四川省 内江市',
+                        area: '隆昌县 ********',
+                        street: '********',
+                        mobile: '15282148708'
+                    },
+                ],
             }
         },
-        methods: {},
+        methods: {
+            setDefault(isDefault) {
+                if (!isDefault) {
+                    console.log(isDefault)
+                }
+            },
+            delAddress() {
+
+            },
+            updateAddress() {
+
+            },
+
+            newAddress() {
+                let obj = {
+                    path: '',
+                    name: '新增地址',
+                };
+                this.userNaveData.push(obj);
+                this.$router.push(newAddress)
+            },
+            back(item) {
+                console.log(item);
+                this.userNaveData = []
+            }
+        },
     }
 </script>
 
@@ -167,12 +215,14 @@
                                 text-align: right;
                                 font-size: 14px;
                                 margin-top: 20px;
+                                display: flex;
+                                justify-content: flex-end;
 
                                 .text-blue {
                                     color: #09c;
                                 }
 
-                                a {
+                                div {
                                     background-color: transparent;
                                     color: inherit;
                                     text-decoration: none;

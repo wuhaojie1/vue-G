@@ -1,7 +1,8 @@
 <template>
     <div id="userNave">
         <el-breadcrumb separator-class="el-icon-arrow-right" class="user-nav">
-            <el-breadcrumb-item v-for="item in userNaveData" class="breadcrumbItem" :to="item.path">{{item.name}}
+            <el-breadcrumb-item v-for="(item,index) in userNaveData" :key="index" class="breadcrumbItem"
+                                @click="back(item)">{{item.name}}
             </el-breadcrumb-item>
         </el-breadcrumb>
     </div>
@@ -16,10 +17,14 @@
         props: {
             userNaveData: {
                 type: Array,
-                default: []
+                default: () => []
             }
         },
-        methods: {}
+        methods: {
+            back(item) {
+                this.$emit('back', item)
+            }
+        }
 
     }
 </script>

@@ -87,14 +87,12 @@
 <script>
     import {WOW} from 'wowjs';
     import Footer from "../components/Footer";
-    import NavBartwo from "../components/NavBartwo";
-    import NavBarOne from "../components/NavBarOne";
     import Header from "../components/header/header";
 
 
     export default {
         name: "index",
-        components: {NavBarOne, NavBartwo, Footer, Header},
+        components: {Footer, Header},
         data() {
             return {
                 dsp4: "TECH SUPPORT TO YOUR DOOR",
