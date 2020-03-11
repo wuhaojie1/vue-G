@@ -51,7 +51,7 @@
                                 name: "个人信息"
                             },
                             {
-                                href: "#",
+                                href: "/account/shippingAddress",
                                 name: "收货地址"
                             },
                             {

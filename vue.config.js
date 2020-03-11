@@ -28,6 +28,8 @@ module.exports = {
             }
         },
         disableHostCheck: true,//Invalid Host header的解决方案
-    }
+    },
+
+    publicPath: './'
 
 };
