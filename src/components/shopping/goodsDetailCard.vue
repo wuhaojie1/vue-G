@@ -32,10 +32,10 @@
                         <div class="toAddress">
                             <div class="goods-detail-address-text">送货至：</div>
                             <el-cascader
-                                    v-model="value"
+                                    v-model="item.address"
                                     :options="item.goodsAddress"
                                     :props="{ expandTrigger: 'hover' }"
-                                    @change="handleChange">
+                                    @change="handleChange(item.address,index)">
                             </el-cascader>
                         </div>
                         <div class="time">
@@ -67,7 +67,9 @@
             }
         },
         data() {
-            return {}
+            return {
+                value: '',
+            }
         },
         methods: {
             changeGoodsStatus(item, index) {
@@ -75,8 +77,11 @@
             },
 
             deleteGoods(index) {
-                this.$emit('delete', index)
-            }
+                this.$emit('deleteGoods', index)
+            },
+            handleChange(address, index) {
+                this.$emit('addressChange', address, index)
+            },
         }
 
     }

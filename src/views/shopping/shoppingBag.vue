@@ -13,6 +13,8 @@
                 <GoodsDetailCard
                         :goodsData="goodsData"
                         @changeGoodsStatus="changeGoodsStatus"
+                        @deleteGoods="deleteGoods"
+                        @addressChange="addressChange"
                 ></GoodsDetailCard>
                 <!--<div class="goods-detail">
                     <div class="goods-detail-left">
@@ -397,6 +399,7 @@
                                 ],
                             }
                         ],
+                        address: '',
                         goodsAddress: [],
                         deliveryTime: '1-2 周发货。'
                     },
@@ -422,6 +425,7 @@
                                 ],
                             }
                         ],
+                        address: '',
                         goodsAddress: [],
                         deliveryTime: '1-2 周发货。'
                     }
@@ -430,9 +434,13 @@
         },
         methods: {
             changeGoodsStatus(item, index) {
-                console.log(item);
-                console.log(index);
                 this.goodsData[index].showgoods = !item.showgoods
+            },
+            addressChange(address, index) {
+                this.goodsData[index].address = address
+            },
+            deleteGoods(index) {
+                console.log(index)
             }
         }
     }
