@@ -30,9 +30,9 @@
             <div class="menu-item">
                 <div class="menu-item-text" @click="toPage('/')">概念产品</div>
             </div>
-            <div class="menu-item">
+            <!--<div class="menu-item">
                 <div class="menu-item-text" @click="toPage('/')">体验馆</div>
-            </div>
+            </div>-->
             <div class="menu-item">
                 <div class="menu-item-text" @click="toPage('/shoppingBag')">购物袋</div>
             </div>
