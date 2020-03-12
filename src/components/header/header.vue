@@ -22,16 +22,22 @@
                 </router-link>
             </div>-->
             <div class="menu-item">
+                <div class="menu-item-text" @click="toPage('/')">热销产品</div>
+            </div>
+            <div class="menu-item">
                 <div class="menu-item-text" @click="toPage('/')">上新</div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-text" @click="toPage('/')">概念产品</div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-text" @click="toPage('/')">体验馆</div>
             </div>
             <div class="menu-item">
                 <div class="menu-item-text" @click="toPage('/shoppingBag')">购物袋</div>
             </div>
             <div class="menu-item">
                 <div class="menu-item-text" @click="toPage('/account/personal')">账户</div>
-            </div>
-            <div class="menu-item">
-                <div class="menu-item-text" @click="toPage('/')">通知</div>
             </div>
             <div class="menu-item search-item" @click="tosearch">
                 <!--<a id="ac-gn-link-search" class="ac-gn-link ac-gn-link-search" href="/cn/search"

@@ -1,8 +1,9 @@
 <template>
     <div id="userNave">
         <el-breadcrumb separator-class="el-icon-arrow-right" class="user-nav">
-            <el-breadcrumb-item v-for="(item,index) in userNaveData" :key="index" class="breadcrumbItem"
-                                @click="back(item)">{{item.name}}
+            <el-breadcrumb-item v-for="item in userNaveData"
+                                :to="item.path"
+                                class="breadcrumbItem">{{item.name}}
             </el-breadcrumb-item>
         </el-breadcrumb>
     </div>

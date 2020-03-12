@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Index from './views/index'
-import Login from './components/Login.vue'
-import Register from './components/Register'
+import index from './views/index'
+import login from './components/Login.vue'
+import register from './components/Register'
 // import TwoDetail from './views/TwoDetail'
 // import ThirdDetail from './views/ThirdDetail'
 // import UserInfo from './components/UserInfo'
@@ -22,9 +22,9 @@ Vue.use(Router);
 export default new Router({
     // mode: 'history',
     routes: [
-        {path: '/', name: 'index', component: Index},//component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
-        {path: '/Login', name: 'Login', component: Login},//登录
-        {path: '/Register', name: 'Register', component: Register},//注册
+        {path: '/', name: 'index', component: index},//component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+        {path: '/login', name: 'login', component: login},//登录
+        {path: '/register', name: 'register', component: register},//注册
         // {path: '/TwoDetail', name: 'TwoDetail', component: TwoDetail},
         /*{
             path: '/ThirdDetail', name: 'ThirdDetail', component: ThirdDetail,
@@ -41,12 +41,8 @@ export default new Router({
             children: [
                 {path: '/account/order', name: 'order', component: order},
                 {path: '/account/personal', name: 'personal', component: personal},
-                {
-                    path: '/account/shippingAddress', name: 'shippingAddress', component: shippingAddress,
-                    children: [
-                        {path: '/account/shippingAddress/newAddress', name: 'newAddress', component: newAddress},
-                    ]
-                },
+                {path: '/account/shippingAddress', name: 'shippingAddress', component: shippingAddress},
+                {path: '/account/newAddress', name: 'newAddress', component: newAddress},
 
             ]
         },//账户

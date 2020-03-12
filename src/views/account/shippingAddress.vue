@@ -1,9 +1,8 @@
 <template>
     <div id="shippingAddress">
         <div class="address-template">
-            <UserNave :userNaveData="userNaveData"
-                      @back="back"></UserNave>
-            <div class="address-card-list-wrap uc-warp" v-if="userNaveData.length===1">
+            <UserNave :userNaveData="userNaveData"></UserNave>
+            <div class="address-card-list-wrap uc-warp">
                 <ul class="address-card-list clearfix">
                     <li class="address-card" v-for="(item,index) in addressData" :key="index">
                         <input id="account-account1-2873038"
@@ -107,10 +106,6 @@
                 this.userNaveData.push(obj);
                 this.$router.push(newAddress)
             },
-            back(item) {
-                console.log(item);
-                this.userNaveData = []
-            }
         },
     }
 </script>
