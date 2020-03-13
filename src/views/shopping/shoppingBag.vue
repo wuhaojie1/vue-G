@@ -151,7 +151,7 @@
 <script>
     import Header from "../../components/header/header"
     // import Footer from "../../components/Footer";
-    import GoodsDetailCard from "../../components/shopping/goodsDetailCard";
+    import GoodsDetailCard from "../../components/shopping/shoppingBagCard";
 
     export default {
         name: "shoppingBag",

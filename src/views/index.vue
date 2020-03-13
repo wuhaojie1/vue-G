@@ -30,13 +30,13 @@
             </el-carousel>
         </div>
         <!--分类-->
-        <div data-target="nav2" data-spy="scroll" data-offset="0">
+        <div data-target="nav2" data-spy="scroll" data-offset="0" class="categories">
             <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
-                <div class="mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+                <div class="mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden" @click="todetail('goodsList')">
                     <div class="kitchenAppliances"></div>
                     <div class="my-3 p-3">
                         <h2 class="display-5">智能厨电</h2>
-                        <p class="lead">包含咖啡机、料理机、消毒柜、洗碗机、油烟机、蒸烤箱、热水壶、电饭煲、微波炉、燃气灶等全品类厨电产品实现智能化</p>
+                        <p class="lead">包含咖啡机、料理机、消毒柜、洗碗机、油烟机、蒸烤箱、热水壶、电饭煲、微波炉、燃气灶等全品类厨电产品</p>
                     </div>
                 </div>
                 <div class="mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
@@ -52,14 +52,14 @@
                     <div class="entertainment"></div>
                     <div class="my-3 p-3">
                         <h2 class="display-5">居家娱乐</h2>
-                        <p class="lead">包含咖啡机、料理机、消毒柜、洗碗机、油烟机、蒸烤箱、热水壶、电饭煲、微波炉、燃气灶等全品类厨电产品实现智能化</p>
+                        <p class="lead">包含电视、手机、电脑、Xbox、PS4、switch、VR、投影、音响等产品</p>
                     </div>
                 </div>
                 <div class="mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
                     <div class="my-3 py-3">
                         <div class="qualityLife"></div>
                         <h2 class="display-5">品质生活</h2>
-                        <p class="lead">包含个护健康设备、云端数据分析、App等智能化能力</p>
+                        <p class="lead">包含个护健康设备、云端数据分析、App等智能化能力的产品</p>
                     </div>
                 </div>
             </div>
@@ -113,6 +113,11 @@
                 live: true
             });
             wow.init()
+        },
+        methods:{
+            todetail(name){
+                this.$router.push(name)
+            }
         }
     }
 </script>
@@ -350,6 +355,15 @@
             width: 100%;
         }
 
+    }
+
+    .categories{
+        h2{
+            cursor: pointer;
+        }
+        h2:hover{
+            text-decoration: underline #2c3e50;
+        }
     }
 
 </style>

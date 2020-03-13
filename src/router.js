@@ -15,6 +15,8 @@ import order from './views/account/order'
 import personal from './views/account/personal'
 import shippingAddress from './views/account/shippingAddress'
 import newAddress from './views/account/newAddress'
+import goodsList from './views/goods/goodsList'
+import goodsDetail from './views/goods/goodsDetail'
 
 
 Vue.use(Router);
@@ -46,6 +48,8 @@ export default new Router({
 
             ]
         },//账户
+        {path: '/goodsList', name: 'goodsList', component: goodsList},//商品列表
+        {path: '/goodsDetail', name: 'goodsDetail', component: goodsDetail},//商品列表
         // {path: '/shoppingCart', name: 'shoppingCart', component: shoppingCart},
     ]
 })

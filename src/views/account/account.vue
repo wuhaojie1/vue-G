@@ -73,6 +73,22 @@
                             },
                         ]
                     },
+                    {
+                        names: [
+                            {
+                                href: "/login",
+                                name: "登录"
+                            },
+                            {
+                                href: "/register",
+                                name: "注册"
+                            },
+                            {
+                                href: "#",
+                                name: "退出登录"
+                            },
+                        ]
+                    },
                 ],
                 userMsg: {
                     userEmail: 'O1493567865996',

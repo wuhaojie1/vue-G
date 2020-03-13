@@ -18,7 +18,7 @@
                 </div>
                 <!--                <button class="btn btn-lg btn-primary btn-block" @click="handleLogin">Login</button>-->
                 <div class="btn btn-lg btn-primary btn-block" @click="handleLogin">Login</div>
-                <a class="nav-link" href="/Register">To Register</a>
+                <a class="nav-link" @click="toregister">To Register</a>
                 <p class="mt-5 mb-3 text-muted">&copy; 2019-2020</p>
             </form>
         </div>
@@ -69,6 +69,9 @@
                     window.console.log(data)
                 });
             },
+            toregister(){
+                this.$router.push('register')
+            }
         }
 
     }
