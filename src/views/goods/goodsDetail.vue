@@ -37,8 +37,10 @@ Nanoleaf Canvas 智能奇光板在照明功能之外，更巧妙地融合了视�
                         </div>
                         <div class="contentBtn">
                             <div class="btn  btn-primary addShoppingBag">
-                                <span class="">添加至购物袋</span>
+                                <span>添加至购物袋</span>
                             </div>
+                            <i class="el-icon-star-on" v-if="collected" @click="addCollect(collected)"></i>
+                            <i class="el-icon-star-off" v-else @click="addCollect(collected)"></i>
                         </div>
 
                     </div>
@@ -46,7 +48,7 @@ Nanoleaf Canvas 智能奇光板在照明功能之外，更巧妙地融合了视�
             </div>
 
             <div class="goodsItem-parameter">
-
+                <ProductInfo :productData="productData"></ProductInfo>
             </div>
         </div>
     </div>
@@ -54,10 +56,12 @@ Nanoleaf Canvas 智能奇光板在照明功能之外，更巧妙地融合了视�
 
 <script>
     import Header from '../../components/header/header'
+    import ProductInfo from "../../components/goods/productInfo";
 
     export default {
         name: "goodsDetail",
         components: {
+            ProductInfo,
             Header
         },
         data() {
@@ -74,6 +78,14 @@ Nanoleaf Canvas 智能奇光板在照明功能之外，更巧妙地融合了视�
                     require('../../assets/img/goods/HMV72_AV6.jpg'),
                 ],
                 selectedImg: require('../../assets/img/goods/HMV72.jpg'),
+                collected: false,
+                productData:[
+                    "//openfile.meizu.com/group1/M00/07/51/Cgbj0F1nTRWAZ8_mAA212Hcm_L4635.jpg",
+                    "//openfile.meizu.com/group1/M00/07/67/Cgbj0V1nM5yAeMRqAA1Vh8xpAxk552.png",
+                    "//openfile.meizu.com/group1/M00/07/53/Cgbj0F1nllqAN0qPAA6Bon99Pz8465.png",
+                    "//openfile.meizu.com/group1/M00/07/69/Cgbj0V1nlmCAYgw1AAtUWqLFiSs589.png"
+                ],
+
             }
         },
         mounted() {
@@ -83,11 +95,14 @@ Nanoleaf Canvas 智能奇光板在照明功能之外，更巧妙地融合了视�
             getGoodsItem() {
                 this.item = this.$route.params.item
                 // eslint-disable-next-line no-console
-                console.log(this.item)
+                // console.log(this.item)
             },
             imgShow(index) {
                 this.selected = index;
                 this.selectedImg = this.imgs[index]
+            },
+            addCollect(collected) {
+                this.collected = !collected
             }
         }
     }
@@ -104,6 +119,7 @@ Nanoleaf Canvas 智能奇光板在照明功能之外，更巧妙地融合了视�
             .goodsItem-msg {
                 display: flex;
                 border-bottom: 1px solid #d6d6d6;
+                padding-bottom: 40px;
 
                 .goodsItem-msg-img {
                     width: 58%;
@@ -154,6 +170,7 @@ Nanoleaf Canvas 智能奇光板在照明功能之外，更巧妙地融合了视�
                 .goodsItem-msg-content {
                     width: 326px;
                     margin-bottom: 35px;
+                    margin-left: 40px;
 
                     .content-items {
                         padding: 59px 0 39px 0;
@@ -206,12 +223,36 @@ Nanoleaf Canvas 智能奇光板在照明功能之外，更巧妙地融合了视�
                             }
                         }
 
+                        .contentBtn {
+                            margin-top: 40px;
+                            display: flex;
+                            align-items: center;
+
+                            .addShoppingBag {
+                                width: 80%;
+
+                                span {
+
+                                }
+                            }
+
+                            i {
+                                margin-left: 20px;
+                                font-size: 24px;
+                                cursor: pointer;
+                            }
+                        }
+
                     }
                 }
             }
 
             .goodsItem-parameter {
+                width: 100%;
 
+                .customizeContent{
+
+                }
             }
         }
     }

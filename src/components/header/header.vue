@@ -34,9 +34,11 @@
                 <div class="menu-item-text" @click="toPage('/')">体验馆</div>
             </div>-->
             <div class="menu-item">
+                <i class="el-icon-goods" @click="toPage('/shoppingBag')"></i>
                 <div class="menu-item-text" @click="toPage('/shoppingBag')">购物袋</div>
             </div>
             <div class="menu-item">
+                <i class="el-icon-user" @click="toPage('/account/personal')"></i>
                 <div class="menu-item-text" @click="toPage('/account/personal')">账户</div>
             </div>
             <div class="menu-item search-item" @click="tosearch">
@@ -109,6 +111,8 @@
                 line-height: 44px;
                 text-decoration: none;
                 cursor: pointer;
+                display: flex;
+                align-items: center;
 
                 .menu-item-text {
                     margin: 0 10px;
@@ -140,6 +144,9 @@
                     opacity: .8;
                     /*outline-offset: -7px;*/
                     font-family: "SF Pro SC", "HanHei SC", "SF Pro Text", "Myriad Set Pro", "SF Pro Icons", "PingFang SC", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+                }
+                i{
+                    color: #fff;
                 }
             }
 

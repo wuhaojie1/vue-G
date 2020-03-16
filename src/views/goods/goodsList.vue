@@ -21,7 +21,7 @@
 
 <script>
     import Header from "../../components/header/header";
-    import CategoryNavBar from "../../components/goods/categoryNavBar";
+    import CategoryNavBar from "../../components/goods/collapseNavBar";
     import goodsCard from "../../components/goods/goodsCard";
 
     export default {

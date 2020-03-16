@@ -10,121 +10,12 @@
                 </div>
             </div>
             <div class="body-goods">
-                <GoodsDetailCard
+                <shoppingBagCard
                         :goodsData="goodsData"
                         @changeGoodsStatus="changeGoodsStatus"
                         @deleteGoods="deleteGoods"
-                        @addressChange="addressChange"
-                ></GoodsDetailCard>
-                <!--<div class="goods-detail">
-                    <div class="goods-detail-left">
-                        <img class="goods-detail-img"
-                             src="https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/mbp16touch-space-select-201911_GEO_CN?wid=800&hei=800&fmt=jpeg&qlt=80&op_usm=0.5,1.5&fit=constrain&.v=1572654981479">
-                    </div>
-                    <div class="goods-detail-right">
-                        <div class="goods-detail-summary">
-                            <div class="goods-basic-msg">
-                                <div class="goods-name">16 英寸 MacBook Pro - 深空灰色</div>
-                                <el-input-number v-model="num" :min="1" :max="10"
-                                                 label="描述文字" size="mini"></el-input-number>
-                                <div class="goods-price">RMB 17,399</div>
-                            </div>
-                            <div class="goods-detail-msg">
-                                <div class="goods-detail-showMsg goods-detail-hoverText"
-                                     @click="changeGoodsStatus(showgoods)">
-                                    显示产品详情
-                                </div>
-                                <div class="goods-detail-del goods-detail-hoverText">移除</div>
-                            </div>
-                            <el-collapse-transition>
-                                <div class="goods-detail-showing" v-show="showgoods">
-                                    <div class="goods-detail-showing-title">硬件</div>
-                                    <ul class="goods-detail-showing-ul" v-for="item in goodsDetailMsg">
-                                        <li class="goods-detail-showing-li">{{item}}</li>
-                                    </ul>
-                                </div>
-                            </el-collapse-transition>
-
-                            <div class="goods-detail-address">
-                                <div class="toAddress">
-                                    <div class="goods-detail-address-text">送货至：</div>
-                                    <el-cascader
-                                            v-model="value"
-                                            :options="options"
-                                            :props="{ expandTrigger: 'hover' }"
-                                            @change="handleChange">
-                                    </el-cascader>
-                                </div>
-                                <div class="time">
-                                    <svg width="24" height="24"
-                                         class="as-svgicon as-svgicon-shipping as-svgicon-16 as-svgicon-shipping16"
-                                         role="img" aria-hidden="true">
-                                        <path d="M12 3.31L4 7.37v8.9l8 4.43 8-4.43v-8.9l-8-4.06zm0 7.95L9.38 9.81l6.25-3.53 2.8 1.42L12 11.26zm2.56-5.53l-6.2 3.51L5.57 7.7 12 4.44l2.56 1.29zM5 8.53l6.5 3.6v7.16L5 15.68V8.53zm7.5 10.75v-7.16l6.5-3.6v7.15l-6.5 3.61z"
-                                              fill="currentColor"></path>
-                                        <path fill="none" d="M0 0h24v24H0z"></path>
-                                    </svg>
-                                    <div class="">1-2 周发货。</div>
-                                </div>
-
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="goods-detail goods-detailOther">
-                    <div class="goods-detail-left">
-                        <img class="goods-detail-img"
-                             src="https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/mbp16touch-space-select-201911_GEO_CN?wid=800&hei=800&fmt=jpeg&qlt=80&op_usm=0.5,1.5&fit=constrain&.v=1572654981479">
-                    </div>
-                    <div class="goods-detail-right">
-                        <div class="goods-detail-summary">
-                            <div class="goods-basic-msg">
-                                <div class="goods-name">16 英寸 MacBook Pro - 深空灰色</div>
-                                <div class="goods-number">1个</div>
-                                <div class="goods-price">RMB 17,399</div>
-                            </div>
-                            <div class="goods-detail-msg">
-                                <div class="goods-detail-showMsg goods-detail-hoverText"
-                                     @click="changeGoodsStatus(showgoods)">
-                                    显示产品详情
-                                </div>
-                                <div class="goods-detail-del goods-detail-hoverText">移除</div>
-                            </div>
-                            <el-collapse-transition>
-                                <div class="goods-detail-showing" v-show="showgoods">
-                                    <div class="goods-detail-showing-title">硬件</div>
-                                    <ul class="goods-detail-showing-ul" v-for="item in goodsDetailMsg">
-                                        <li class="goods-detail-showing-li">{{item}}</li>
-                                    </ul>
-                                </div>
-                            </el-collapse-transition>
-
-                            <div class="goods-detail-address">
-                                <div class="toAddress">
-                                    <div class="goods-detail-address-text">送货至：</div>
-                                    <el-cascader
-                                            v-model="value"
-                                            :options="options"
-                                            :props="{ expandTrigger: 'hover' }"
-                                            @change="handleChange">
-                                    </el-cascader>
-                                </div>
-                                <div class="time">
-                                    <svg width="24" height="24"
-                                         class="as-svgicon as-svgicon-shipping as-svgicon-16 as-svgicon-shipping16"
-                                         role="img" aria-hidden="true">
-                                        <path d="M12 3.31L4 7.37v8.9l8 4.43 8-4.43v-8.9l-8-4.06zm0 7.95L9.38 9.81l6.25-3.53 2.8 1.42L12 11.26zm2.56-5.53l-6.2 3.51L5.57 7.7 12 4.44l2.56 1.29zM5 8.53l6.5 3.6v7.16L5 15.68V8.53zm7.5 10.75v-7.16l6.5-3.6v7.15l-6.5 3.61z"
-                                              fill="currentColor"></path>
-                                        <path fill="none" d="M0 0h24v24H0z"></path>
-                                    </svg>
-                                    <div class="">1-2 周发货。</div>
-                                </div>
-
-
-                            </div>
-                        </div>
-                    </div>
-                </div>-->
+                        @addressChange="addressChange">
+                </shoppingBagCard>
             </div>
             <div class="goods-settle-account">
                 <div class="goods-settle-right">
@@ -151,11 +42,11 @@
 <script>
     import Header from "../../components/header/header"
     // import Footer from "../../components/Footer";
-    import GoodsDetailCard from "../../components/shopping/shoppingBagCard";
+    import shoppingBagCard from "../../components/shopping/shoppingBagCard";
 
     export default {
         name: "shoppingBag",
-        components: {GoodsDetailCard, Header},
+        components: {shoppingBagCard, Header},
         data() {
             return {
                 money: '26,098',

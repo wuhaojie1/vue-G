@@ -1,25 +1,30 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import index from './views/index'
-import login from './components/Login.vue'
-import register from './components/Register'
+import index from '../views/index'
+import login from '../components/Login.vue'
+import register from '../components/Register'
 // import TwoDetail from './views/TwoDetail'
 // import ThirdDetail from './views/ThirdDetail'
 // import UserInfo from './components/UserInfo'
 // import Comment from './components/Comment'
 // import Standard from './components/Standard'
 // import shoppingCart from './views/shoppingCart'
-import shoppingBag from './views/shopping/shoppingBag'
-import account from './views/account/account'
-import order from './views/account/order'
-import personal from './views/account/personal'
-import shippingAddress from './views/account/shippingAddress'
-import newAddress from './views/account/newAddress'
-import goodsList from './views/goods/goodsList'
-import goodsDetail from './views/goods/goodsDetail'
+import shoppingBag from '../views/shopping/shoppingBag'
+import account from '../views/account/account'
+import order from '../views/account/order'
+import personal from '../views/account/personal'
+import shippingAddress from '../views/account/shippingAddress'
+import newAddress from '../views/account/newAddress'
+import goodsList from '../views/goods/goodsList'
+import goodsDetail from '../views/goods/goodsDetail'
 
 
 Vue.use(Router);
+
+const VueRouterPush = Router.prototype.push;
+Router.prototype.push = function push(to) {
+    return VueRouterPush.call(this, to).catch(err => err)
+};
 
 export default new Router({
     // mode: 'history',
