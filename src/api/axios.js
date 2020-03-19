@@ -76,7 +76,8 @@ const http = ({
     return new Promise((resolve, reject) => {
         if (isLogin) {
             axios({
-                url: `${prefix}/${url}?&&t=${timestamp}`, //
+                // url: `${prefix}/${url}?&&t=${timestamp}`, //
+                url: `${prefix}/${url}`, //
                 headers: formatHeaders(headers),
                 // data: formatParams(params),
                 data: params,

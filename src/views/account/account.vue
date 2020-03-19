@@ -22,6 +22,7 @@
 <script>
     import Header from "../../components/header/header"
     import NavLeftContainer from "../../components/accout/navLeftContainer";
+    import localStorage from "../../assets/js/localStorage";
 
     export default {
         name: "account",
@@ -30,7 +31,27 @@
             Header
         },
         mounted() {
-            this.$router.push('/account/personal')
+            this.$router.push('/account/personal');
+            // console.log(localStorage.get('isLogin'))
+            let isLogin = localStorage.get('isLogin')
+            if (!isLogin) {
+                //用户未登录
+                this.$router.push('/login');
+
+            } else {
+                //用户以登录
+                // console.log(this.navData[this.navData.length - 1]);
+                /*this.navData[this.navData.length - 1] = {
+                    names: [
+                        {
+                            href: "#",
+                            name: "退出登录"
+                        },
+                    ]
+                };*/
+                this.getUserMsg()
+            }
+
         },
         data() {
             return {
@@ -93,7 +114,8 @@
                 userMsg: {
                     userEmail: 'O1493567865996',
                     headerImg: 'https://statics.oneplus.cn/ov/assets/images/referral/avatar-default.png',
-                }
+                },
+                isLogin: null
             }
         },
         methods: {
@@ -101,6 +123,14 @@
                 // console.log(nameItem)
                 let href = nameItem.href;
                 this.$router.push(href)
+            },
+            getUserMsg() {
+                this.axios({
+                    url: "",
+                    method: "post",
+                }).then((res) => {
+                    console.log(res)
+                })
             }
         }
 

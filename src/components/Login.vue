@@ -29,6 +29,7 @@
     // import {encrypt} from '@/assets/js/rsaEncrypt'
     // import {login} from '@/assets/js/Login'
     import Header from "./header/header"
+    import localStorage from "../assets/js/localStorage"
     // import Cookies from 'js-cookie'
     // import Config from '@/settings'
     // import request from '@/assets/js/request';
@@ -43,7 +44,7 @@
         data() {
             return {
                 loginForm: {
-                    email: '1191125750@qq.com',
+                    email: 'admin@qq.com',
                     password: '111111',
                     rememberMe: false,
                 },
@@ -55,7 +56,9 @@
                     console.log(res);
                 })
             },*/
+
             handleLogin() {
+                // debugger
                 // let postData = this.loginForm;
                 let postData = {
                     ...this.loginForm
@@ -64,12 +67,24 @@
                     url: "api/login",
                     method: "post",
                     params: JSON.stringify(postData)
-                }).then(data => {
+                }).then(res => {
                     // debugger
-                    window.console.log(data)
+                    // window.console.log(res.data.data[0]);
+                    if (res.status === 200) {
+                        let token = res.data.data[0].api_token;
+                        let userMsg = {
+                            ...res.data.data[0]
+                        };
+                        localStorage.set('token', JSON.stringify(token));
+                        localStorage.set('userMsg', JSON.stringify(userMsg));
+                        localStorage.set('isLogin', true);
+                        //返回上一页
+                        this.$router.go(-1)
+                    }
+
                 });
             },
-            toregister(){
+            toregister() {
                 this.$router.push('register')
             }
         }

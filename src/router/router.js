@@ -17,6 +17,7 @@ import shippingAddress from '../views/account/shippingAddress'
 import newAddress from '../views/account/newAddress'
 import goodsList from '../views/goods/goodsList'
 import goodsDetail from '../views/goods/goodsDetail'
+import conceptProducts from '../views/conceptProducts/index'
 
 
 Vue.use(Router);
@@ -55,6 +56,7 @@ export default new Router({
         },//账户
         {path: '/goodsList', name: 'goodsList', component: goodsList},//商品列表
         {path: '/goodsDetail', name: 'goodsDetail', component: goodsDetail},//商品列表
+        {path: '/conceptProducts', name: 'conceptProducts', component: conceptProducts},//概念产品
         // {path: '/shoppingCart', name: 'shoppingCart', component: shoppingCart},
     ]
 })

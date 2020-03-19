@@ -28,7 +28,7 @@
                 <div class="menu-item-text" @click="toPage('/')">上新</div>
             </div>
             <div class="menu-item">
-                <div class="menu-item-text" @click="toPage('/')">概念产品</div>
+                <div class="menu-item-text" @click="toPage('/conceptProducts')">概念产品</div>
             </div>
             <!--<div class="menu-item">
                 <div class="menu-item-text" @click="toPage('/')">体验馆</div>

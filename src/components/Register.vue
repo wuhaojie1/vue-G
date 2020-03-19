@@ -52,10 +52,10 @@
                     params: JSON.stringify(postData)
                 }).then(res => {
                     // debugger
-                    // console.log(data)
-                    if (res.data.success) {
+                    window.console.log(res)
+                    /*if (res.data.status) {
                         this.$router.push('/login')
-                    }
+                    }*/
                 });
             }
         }

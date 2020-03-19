@@ -73,6 +73,7 @@
     import {WOW} from 'wowjs';
     import Footer from "../components/Footer";
     import Header from "../components/header/header";
+    import localStorage from "../assets/js/localStorage";
 
 
     export default {
@@ -112,7 +113,9 @@
                 mobile: true,
                 live: true
             });
-            wow.init()
+            wow.init();
+            // let isLogin = localStorage.get('isLogin');
+
         },
         methods:{
             todetail(name){
