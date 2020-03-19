@@ -69,12 +69,10 @@
                     params: JSON.stringify(postData)
                 }).then(res => {
                     // debugger
-                    // window.console.log(res.data.data[0]);
-                    if (res.status === 200) {
-                        let token = res.data.data[0].api_token;
-                        let userMsg = {
-                            ...res.data.data[0]
-                        };
+                    window.console.log(res);
+                   if (res.status === 200) {
+                        let token = res.data.api_token;
+                        let userMsg = res.data;
                         localStorage.set('token', JSON.stringify(token));
                         localStorage.set('userMsg', JSON.stringify(userMsg));
                         localStorage.set('isLogin', true);

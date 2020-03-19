@@ -3,6 +3,7 @@ import axios from 'axios';
 // import bus from './bus';
 // import {getCookie} from '../cookie';
 // import router from '../../router/router'
+import localStorage from "../assets/js/localStorage";
 import api from './api';
 
 let isLogin = true;
@@ -26,7 +27,7 @@ const formatHeaders = (acHeaders) => {
     // headers['exchange-language'] = getCookie('lan') || 'zh_CN';
     // headers['Content-type'] = 'application/x-www-form-urlencoded';
     headers['Content-type'] = 'application/json';
-    // headers["__token"] = getCookie("tooken");
+    headers["token"] = localStorage.get('token');
     // headers['Accept'] = 'application/msword'
 
     // headers['exchange-time'] = formatTime(new Date().getTime()) Access-Control-Allow-Origin
