@@ -29,6 +29,7 @@
 <script>
     // import NavBarOne from "./NavBarOne";
     import Header from "./header/header"
+    import account from "@/assets/js/account/account"
     export default {
         name: "login",
         components: {
@@ -46,17 +47,20 @@
         methods: {
             register() {
                 let postData = this.registerForm;
-                this.axios({
+                account.register(postData).then((res) => {
+                    console.log(res)
+                })
+                /*this.axios({
                     url: "api/register",
                     method: "post",
                     params: JSON.stringify(postData)
                 }).then(res => {
                     // debugger
                     window.console.log(res)
-                    /*if (res.data.status) {
+                    /!*if (res.data.status) {
                         this.$router.push('/login')
-                    }*/
-                });
+                    }*!/
+                });*/
             }
         }
     }

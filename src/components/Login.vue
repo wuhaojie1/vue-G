@@ -30,6 +30,7 @@
     // import {login} from '@/assets/js/Login'
     import Header from "./header/header"
     import localStorage from "../assets/js/localStorage"
+    import account from "@/assets/js/account/account"
     // import Cookies from 'js-cookie'
     // import Config from '@/settings'
     // import request from '@/assets/js/request';
@@ -63,24 +64,15 @@
                 let postData = {
                     ...this.loginForm
                 };
-                this.axios({
-                    url: "api/login",
-                    method: "post",
-                    params: JSON.stringify(postData)
-                }).then(res => {
-                    // debugger
-                    window.console.log(res);
-                   if (res.status === 200) {
-                        let token = res.data.api_token;
-                        let userMsg = res.data;
-                        localStorage.set('token', JSON.stringify(token));
-                        localStorage.set('userMsg', JSON.stringify(userMsg));
+                account.login(postData).then((res) => {
+                    if (res.status === 200) {
+                        localStorage.set('token', JSON.stringify(res.data.api_token));
+                        localStorage.set('userMsg', JSON.stringify(res.data));
                         localStorage.set('isLogin', true);
-                        //返回上一页
                         this.$router.go(-1)
                     }
-
-                });
+                    // console.log(res)
+                })
             },
             toregister() {
                 this.$router.push('register')

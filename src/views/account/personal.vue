@@ -62,6 +62,8 @@
 
 <script>
     import UserNave from "../../components/accout/userNave";
+    import account from "@/assets/js/account/account"
+    import localStorage from "../../assets/js/localStorage";
 
     export default {
         name: "personal",
@@ -111,7 +113,20 @@
                 userHeaderImg: 'https://statics.oneplus.cn/ov/assets/images/user/user-info/avatar-default.png',
             }
         },
-        methods: {}
+        mounted() {
+            this.getUserInfo()
+        },
+        methods: {
+            getUserInfo() {
+                let userMsg = JSON.parse(localStorage.get('userMsg'));
+                let obj = {
+                    id:userMsg.id
+                };
+                account.getUserInfo(obj).then((res) => {
+                    console.log(res)
+                })
+            }
+        }
     }
 </script>
 
