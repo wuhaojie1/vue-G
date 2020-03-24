@@ -118,9 +118,10 @@
         },
         methods: {
             getUserInfo() {
-                let userMsg = JSON.parse(localStorage.get('userMsg'));
+                let token = JSON.parse(localStorage.get('token'));
                 let obj = {
-                    id:userMsg.id
+                    // token: token,
+                    id: 10,
                 };
                 account.getUserInfo(obj).then((res) => {
                     console.log(res)

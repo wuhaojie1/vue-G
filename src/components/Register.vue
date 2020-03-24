@@ -14,6 +14,10 @@
                 <input type="email" id="inputEmail" class="form-control" placeholder="Email address"
                        v-model="registerForm.email" required>
 
+                <!--<label for="inputPhone" class="sr-only">Phone</label>
+                <input type="phone" id="inputPhone" class="form-control" placeholder="phone"
+                       v-model="registerForm.phone" required>-->
+
                 <label for="inputPassword" class="sr-only">Password</label>
                 <input type="password" id="inputPassword" class="form-control" placeholder="Password"
                        v-model="registerForm.password" required>
@@ -30,6 +34,7 @@
     // import NavBarOne from "./NavBarOne";
     import Header from "./header/header"
     import account from "@/assets/js/account/account"
+
     export default {
         name: "login",
         components: {
@@ -41,6 +46,7 @@
                     name: '',
                     email: '',
                     password: '',
+                    // phone:'',
                 },
             }
         },
@@ -48,7 +54,14 @@
             register() {
                 let postData = this.registerForm;
                 account.register(postData).then((res) => {
-                    console.log(res)
+                    if (res.data.success) {
+                        this.$router.push({
+                            name: 'login',
+                            params: {
+                                item: postData
+                            }
+                        })
+                    }
                 })
                 /*this.axios({
                     url: "api/register",
@@ -111,6 +124,11 @@
     }
 
     .form-register input[type="email"] {
+        margin-bottom: -1px;
+        border-radius: 0;
+    }
+
+    .form-register input[type="phone"] {
         margin-bottom: -1px;
         border-radius: 0;
     }

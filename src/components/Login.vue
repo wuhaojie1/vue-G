@@ -51,6 +51,17 @@
                 },
             }
         },
+        mounted() {
+            let item = this.$route.params.item;
+            console.log(item);
+            if (item) {
+                this.loginForm = {
+                    ...item,
+                    rememberMe: false,
+                };
+            }
+
+        },
         methods: {
             /*login() {
                 this.$axios.post(`${this.$root.baseURL}/login`, this.loginData).then(function (res) {
@@ -66,10 +77,12 @@
                 };
                 account.login(postData).then((res) => {
                     if (res.status === 200) {
-                        localStorage.set('token', JSON.stringify(res.data.api_token));
+                        localStorage.set('token', JSON.stringify(res.data.token));
                         localStorage.set('userMsg', JSON.stringify(res.data));
                         localStorage.set('isLogin', true);
-                        this.$router.go(-1)
+                        this.$router.push({
+                            name: 'account'
+                        })
                     }
                     // console.log(res)
                 })

@@ -16,11 +16,10 @@ export function register(data) {
     })
 }
 
-export function getUserInfo(data) {
+export function getUserInfo() {
     return axios({
-        url: 'api/UserInfo',
-        method: 'post',
-        data
+        url: 'api/user',
+        method: 'get',
     })
 }
 

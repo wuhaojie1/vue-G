@@ -5,24 +5,25 @@ import api from './api'
 //创建axios实例
 const service = axios.create({
     baseURL: api.localApi,
-    timeout: '80000'
+    timeout: '80000',
 });
 
 // request拦截器
 service.interceptors.request.use(
     config => {
-        // let isLogin = localStorage.get('isLogin');
+        let isLogin = localStorage.get('isLogin');
         let token = localStorage.get('token');
         // let Cookies = localStorage.get('Cookies');
-        // if (isLogin) {
-        //     config.headers['token'] = token;
-        // }
+        if (isLogin) {
+            // config.headers['Authorization'] = token;
+            config.data.token = JSON.parse(token)
+        }
         config.headers['Content-Type'] = 'application/json';
-        config.headers['token'] = token;
+        // config.headers['token'] = token;
         return config;
     },
     error => {
-        console.log(error); // for debug
+        // console.log(error); // for debug
         Promise.reject(error);
     }
 );
@@ -30,7 +31,7 @@ service.interceptors.request.use(
 // response 拦截器
 service.interceptors.response.use(
     response => {
-        console.log(response.headers);
+        // console.log(response.headers);
         return response
     },
     error => {

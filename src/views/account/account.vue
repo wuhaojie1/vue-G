@@ -39,7 +39,7 @@
                 this.$router.push('/login');
 
             } else {
-                //用户以登录
+                // 用户以登录
                 // console.log(this.navData[this.navData.length - 1]);
                 /*this.navData[this.navData.length - 1] = {
                     names: [
@@ -52,7 +52,8 @@
                 this.getUserMsg()
             }
 
-        },
+        }
+        ,
         data() {
             return {
                 navData: [
@@ -117,21 +118,14 @@
                 },
                 isLogin: null
             }
-        },
+        }
+        ,
         methods: {
             topage(nameItem) {
                 // console.log(nameItem)
                 let href = nameItem.href;
                 this.$router.push(href)
             },
-            getUserMsg() {
-                this.axios({
-                    url: "",
-                    method: "post",
-                }).then((res) => {
-                    console.log(res)
-                })
-            }
         }
 
     }
