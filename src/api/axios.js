@@ -15,9 +15,9 @@ service.interceptors.request.use(
         let token = localStorage.get('token');
         // let Cookies = localStorage.get('Cookies');
         if (isLogin) {
-            // config.headers['Authorization'] = token;
-            config.data.token = JSON.parse(token)
+            config.headers['Authorization'] = 'Bearer'+' '+JSON.parse(token);
         }
+
         config.headers['Content-Type'] = 'application/json';
         // config.headers['token'] = token;
         return config;

@@ -53,7 +53,6 @@
         },
         mounted() {
             let item = this.$route.params.item;
-            console.log(item);
             if (item) {
                 this.loginForm = {
                     ...item,

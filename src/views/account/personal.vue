@@ -118,12 +118,7 @@
         },
         methods: {
             getUserInfo() {
-                let token = JSON.parse(localStorage.get('token'));
-                let obj = {
-                    // token: token,
-                    id: 10,
-                };
-                account.getUserInfo(obj).then((res) => {
+                account.getUserInfo().then((res) => {
                     console.log(res)
                 })
             }

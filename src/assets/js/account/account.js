@@ -1,5 +1,7 @@
 import axios from '@/api/axios';
+import localStorage from "@/assets/js/localStorage";
 
+let token = JSON.parse(localStorage.get('token'));
 export function login(data) {
     return axios({
         url: 'api/login',
@@ -16,11 +18,16 @@ export function register(data) {
     })
 }
 
-export function getUserInfo() {
+export function getUserInfo(data) {
+    // let obj = {
+    //     token: token,
+    //     ...data
+    // };
     return axios({
         url: 'api/user',
-        method: 'get',
+        method: 'post',
+        // data: obj
     })
 }
 
-export default { login, getUserInfo, register }
+export default {login, getUserInfo, register}

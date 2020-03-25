@@ -20,9 +20,10 @@
 </template>
 
 <script>
-    import Header from "../../components/header/header"
+    import Header from "../../components/header/header";
     import NavLeftContainer from "../../components/accout/navLeftContainer";
     import localStorage from "../../assets/js/localStorage";
+    import account from "@/assets/js/account/account";
 
     export default {
         name: "account",
@@ -49,7 +50,7 @@
                         },
                     ]
                 };*/
-                this.getUserMsg()
+                // this.getUserMsg()
             }
 
         }
@@ -118,14 +119,21 @@
                 },
                 isLogin: null
             }
-        }
-        ,
+        },
         methods: {
             topage(nameItem) {
                 // console.log(nameItem)
                 let href = nameItem.href;
                 this.$router.push(href)
             },
+            // getUserMsg(){
+            //     let obj = {
+            //         id: 10,
+            //     };
+            //     account.getUserInfo(obj).then((res) => {
+            //         console.log(res)
+            //     })
+            // }
         }
 
     }
