@@ -32,4 +32,12 @@ export function update(data) {
 
 }
 
-export default { login, getUserInfo, register, update}
+export function getArea() {
+    return axios({
+        url: 'api/area',
+        method: 'get',
+    })
+
+}
+
+export default { login, getUserInfo, register, update, getArea}

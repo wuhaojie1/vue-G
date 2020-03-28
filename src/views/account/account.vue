@@ -52,7 +52,7 @@
                         },
                     ]
                 };*/
-                // this.getUserMsg()
+                this.getArea()
             }
 
         }
@@ -133,7 +133,12 @@
                         localStorage.set('userMsg', JSON.stringify(user));
                     }
                 })
-            }
+            },
+            getArea(){
+                account.getArea().then((res)=>{
+                    localStorage.set('region', JSON.stringify(res.data.area));
+                })
+            },
         }
 
     }

@@ -154,7 +154,7 @@
                         name: userMsg.email,
                         tip: '',
                         type: 'email',
-                        edit: true
+                        edit: false
                     },
                     {
                         nameTitle: '手机号:',
