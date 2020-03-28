@@ -77,7 +77,6 @@
                 account.login(postData).then((res) => {
                     if (res.status === 200) {
                         localStorage.set('token', JSON.stringify(res.data.token));
-                        localStorage.set('userMsg', JSON.stringify(res.data));
                         localStorage.set('isLogin', true);
                         this.$router.push({
                             name: 'account'

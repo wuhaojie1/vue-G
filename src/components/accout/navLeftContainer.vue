@@ -2,10 +2,10 @@
     <div id="navLeftContainer">
         <div class="user-avatar">
             <div class="user-header">
-                <img :src="userMsg.headerImg" alt=""/>
+                <img :src="userMsg.headimg" alt=""/>
             </div>
             <h4 class="user-email">
-                {{userMsg.userEmail}}
+                {{userMsg.email}}
             </h4>
         </div>
         <div class="nav-left">
@@ -24,6 +24,7 @@
 </template>
 
 <script>
+    import localStorage from "../../assets/js/localStorage";
     export default {
         name: "navLeftContainer",
         props: {
@@ -31,14 +32,14 @@
                 type: Array,
                 default: () => [],
             },
-            userMsg: {
-                type: Object,
-                default: () => {
-                },
-            }
         },
         data() {
-            return {}
+            return {
+                userMsg:{},
+            }
+        },
+        mounted() {
+            this.userMsg = JSON.parse(localStorage.get('userMsg'))
         },
         methods: {
             topage(nameItem) {

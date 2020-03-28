@@ -62,6 +62,12 @@
                             }
                         })
                     }
+                }).catch((err) => {
+                    // console.log(err);
+                    // this.$message({
+                    //     type: 'info',
+                    //     message: err.errors.email[0]
+                    // });
                 })
                 /*this.axios({
                     url: "api/register",

@@ -27,7 +27,7 @@
                                         <div class="username">{{item.name}}</div>
                                         <div class="edit">
                                             <div class="tip" v-if="item.edit">{{item.tip}}</div>
-                                            <div class="editBtn" v-if="item.edit">编辑</div>
+                                            <div class="editBtn" v-if="item.edit" @click="edit(item.type)">编辑</div>
                                         </div>
                                     </div>
                                 </div>
@@ -47,7 +47,7 @@
                                         <div class="username">{{item.name}}</div>
                                         <div class="edit">
                                             <div class="tip" v-if="item.edit">{{item.tip}}</div>
-                                            <div class="editBtn" v-if="item.edit">编辑</div>
+                                            <div class="editBtn" v-if="item.edit" @click="edit(item.type)">编辑</div>
                                         </div>
                                     </div>
                                 </div>
@@ -79,13 +79,13 @@
                 userBasicInfoData: [
                     {
                         nameTitle: '用户名',
-                        name: 'O1493567865996',
+                        name: '',
                         tip: '用户名只可以修改一次',
                         edit: true
                     },
                     {
                         nameTitle: '国家',
-                        name: '中国',
+                        name: '',
                         tip: '用户名只可以修改一次',
                         edit: false
                     }
@@ -93,13 +93,13 @@
                 userSecurityInfoData: [
                     {
                         nameTitle: '邮箱',
-                        name: '1191125750@qq.com',
+                        name: '',
                         tip: '',
                         edit: true
                     },
                     {
                         nameTitle: '手机号:',
-                        name: '+86 15282148708',
+                        name: '',
                         tip: '',
                         edit: true
                     },
@@ -114,14 +114,159 @@
             }
         },
         mounted() {
-            this.getUserInfo()
+            // this.getUserInfo()
+            this.getUserMsg()
         },
         methods: {
-            getUserInfo() {
+            getUserMsg() {
+                let that = this;
                 account.getUserInfo().then((res) => {
-                    console.log(res)
+                    // console.log(res);
+                    let user = res.data.user;
+                    if (res.status === 200) {
+                        localStorage.set('userMsg', JSON.stringify(user));
+                        that.assemblyUsermsg(user)
+                    }
+                })
+            },
+
+            assemblyUsermsg(userMsg) {
+                // let userMsg = JSON.parse(localStorage.get('userMsg'));
+                this.userBasicInfoData = [
+                    {
+                        nameTitle: '用户名',
+                        name: userMsg.name,
+                        tip: '',
+                        type: 'name',
+                        edit: true
+                    },
+                    {
+                        nameTitle: '国家',
+                        name: userMsg.country,
+                        tip: '',
+                        type: 'country',
+                        edit: true
+                    }
+                ];
+                this.userSecurityInfoData = [
+                    {
+                        nameTitle: '邮箱',
+                        name: userMsg.email,
+                        tip: '',
+                        type: 'email',
+                        edit: true
+                    },
+                    {
+                        nameTitle: '手机号:',
+                        name: userMsg.phone,
+                        tip: '',
+                        type: 'phone',
+                        edit: true
+                    },
+                    {
+                        nameTitle: '密码::',
+                        name: '为保障账户安全，建议你定期更换密码。',
+                        tip: '',
+                        type: 'password',
+                        edit: true
+                    }
+                ];
+
+            },
+
+            edit(type) {
+                // console.log(type);
+                let data;
+                switch (type) {
+                    case 'name':
+                        data = {
+                            tip: '请输入用户名',
+                            title: '用户名',
+                            option: {
+                                confirmButtonText: '修改',
+                                cancelButtonText: '取消',
+                                // inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
+                                // inputErrorMessage: '邮箱格式不正确'
+                            }
+                        };
+                        this.assembly(data, type);
+                        break;
+                    case  'email':
+                        data = {
+                            tip: '请输入邮箱',
+                            title: '邮箱',
+                            option: {
+                                confirmButtonText: '修改',
+                                cancelButtonText: '取消',
+                                inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
+                                inputErrorMessage: '邮箱格式不正确'
+                            }
+                        };
+                        this.assembly(data, type);
+                        break;
+                    case  'phone':
+                        data = {
+                            tip: '请输入手机号',
+                            title: '手机',
+                            option: {
+                                confirmButtonText: '修改',
+                                cancelButtonText: '取消',
+                            }
+                        };
+                        this.assembly(data, type);
+                        break;
+                    case  'password':
+                        data = {
+                            tip: '请输入新密码',
+                            title: '密码',
+                            option: {
+                                confirmButtonText: '修改',
+                                cancelButtonText: '取消',
+                            }
+                        };
+                        this.assembly(data, type);
+                        break;
+                    case  'country':
+                        data = {
+                            tip: '请输入国家',
+                            title: '国家',
+                            option: {
+                                confirmButtonText: '修改',
+                                cancelButtonText: '取消',
+                            }
+                        };
+                        this.assembly(data, type);
+                        break;
+                }
+            },
+
+            assembly(data, type) {
+                let that = this;
+                this.$prompt(data.tip, data.title, {
+                    ...data.option
+                }).then((res) => {
+                    that.upadte(type, res.value)
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消修改'
+                    });
+                });
+            },
+
+            upadte(type, value) {
+                let that = this
+                let userMsg = JSON.parse(localStorage.get('userMsg'));
+                let data = {
+                    ...userMsg,
+                    [type]: value,
+                };
+                account.update(data).then(() => {
+                    that.getUserMsg()
                 })
             }
+
+
         }
     }
 </script>

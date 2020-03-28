@@ -7,7 +7,6 @@
                 <!--导航-->
                 <NavLeftContainer
                         :navData="navData"
-                        :userMsg="userMsg"
                         @topage="topage">
                 </NavLeftContainer>
 
@@ -30,6 +29,9 @@
         components: {
             NavLeftContainer,
             Header
+        },
+        created() {
+
         },
         mounted() {
             this.$router.push('/account/personal');
@@ -113,11 +115,8 @@
                         ]
                     },
                 ],
-                userMsg: {
-                    userEmail: 'O1493567865996',
-                    headerImg: 'https://statics.oneplus.cn/ov/assets/images/referral/avatar-default.png',
-                },
-                isLogin: null
+                isLogin: null,
+
             }
         },
         methods: {
@@ -126,14 +125,15 @@
                 let href = nameItem.href;
                 this.$router.push(href)
             },
-            // getUserMsg(){
-            //     let obj = {
-            //         id: 10,
-            //     };
-            //     account.getUserInfo(obj).then((res) => {
-            //         console.log(res)
-            //     })
-            // }
+            getUserMsg() {
+                account.getUserInfo().then((res) => {
+                    // console.log(res);
+                    let user = res.data.user;
+                    if (res.status === 200) {
+                        localStorage.set('userMsg', JSON.stringify(user));
+                    }
+                })
+            }
         }
 
     }
