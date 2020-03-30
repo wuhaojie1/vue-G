@@ -8,6 +8,13 @@ export function login(data) {
     })
 }
 
+export function loginOut() {
+    return axios({
+        url: 'api/logout',
+        method: 'get',
+    })
+}
+
 export function register(data) {
     return axios({
         url: 'api/register',
@@ -40,4 +47,57 @@ export function getArea() {
 
 }
 
-export default { login, getUserInfo, register, update, getArea}
+export function saveShippingAddress(data) {
+    return axios({
+        url: 'api/shippingAddress/new',
+        method: 'post',
+        data
+    })
+}
+
+export function updateShippingAddress(data) {
+    return axios({
+        url: 'api/shippingAddress/update',
+        method: 'post',
+        data
+    })
+}
+
+export function getShippingAddress() {
+    return axios({
+        url: 'api/shippingAddress/list',
+        method: 'get',
+    })
+}
+
+export function getAddressDetail(data) {
+    return axios({
+        url: 'api/shippingAddress/detail',
+        method: 'post',
+        data
+    })
+}
+
+export function delAddress(data) {
+    return axios({
+        url: 'api/shippingAddress/delete',
+        method: 'post',
+        data
+    })
+}
+
+
+
+export default {
+    login,
+    loginOut,
+    getUserInfo,
+    register,
+    update,
+    getArea,
+    saveShippingAddress,
+    getShippingAddress,
+    getAddressDetail,
+    updateShippingAddress,
+    delAddress,
+}

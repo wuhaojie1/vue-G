@@ -22,9 +22,9 @@
                                      @click="setDefault(item.isDefault)">默认地址
                                 </div>
                                 <span>|</span>
-                                <div class="text-blue" @click="delAddress">删除</div>
+                                <div class="text-blue" @click="delAddress(item)">删除</div>
                                 <span>|</span>
-                                <div class="text-blue" @click="updateAddress">修改</div>
+                                <div class="text-blue" @click="updateAddress(item)">编辑</div>
                             </div>
                         </label>
                     </li>
@@ -49,10 +49,17 @@
 <script>
     import UserNave from "../../components/accout/userNave";
     import newAddress from "./newAddress";
+    import account, {getShippingAddress} from "../../assets/js/account/account";
+    import localStorage from "../../assets/js/localStorage";
 
     export default {
         name: "shippingAddress",
-        components: {UserNave},
+        components: {
+            UserNave
+        },
+        mounted() {
+            this.getAddressList()
+        },
         data() {
             return {
                 userNaveData: [
@@ -66,22 +73,22 @@
                     },*/
                 ],
                 addressData: [
-                    {
-                        isDefault: true,
-                        name: '巫浩洁',
-                        region: '四川省 内江市',
-                        area: '隆昌县 ********',
-                        street: '********',
-                        mobile: '15282148708'
-                    },
-                    {
-                        isDefault: false,
-                        name: '巫浩洁',
-                        region: '四川省 内江市',
-                        area: '隆昌县 ********',
-                        street: '********',
-                        mobile: '15282148708'
-                    },
+                    // {
+                    //     isDefault: true,
+                    //     name: '巫浩洁',
+                    //     region: '四川省 内江市',
+                    //     area: '隆昌县 ********',
+                    //     street: '********',
+                    //     mobile: '15282148708'
+                    // },
+                    // {
+                    //     isDefault: false,
+                    //     name: '巫浩洁',
+                    //     region: '四川省 内江市',
+                    //     area: '隆昌县 ********',
+                    //     street: '********',
+                    //     mobile: '15282148708'
+                    // },
                 ],
             }
         },
@@ -91,21 +98,111 @@
                     console.log(isDefault)
                 }
             },
-            delAddress() {
 
+            delAddress(item) {
+                let obj = {
+                    id: item.id
+                };
+                account.delAddress(obj).then(res=>{
+                    if (res.data.success) {
+                            this.$message({
+                                type: 'success',
+                                message: '删除成功'
+                            });
+                            this.getAddressList()
+                        }
+                })
             },
-            updateAddress() {
 
+            updateAddress(item) {
+                let obj = {
+                    path: '',
+                    name: '编辑地址',
+                    type:'edit',
+                    ...item
+                };
+                this.$router.push({
+                    name: 'newAddress',
+                    params: obj
+                })
             },
 
             newAddress() {
                 let obj = {
                     path: '',
                     name: '新增地址',
+                    type:'new'
                 };
                 this.userNaveData.push(obj);
-                this.$router.push(newAddress)
+                this.$router.push({
+                    name: 'newAddress',
+                    params: obj
+
+                })
             },
+            getAddressList() {
+                let that = this;
+                account.getShippingAddress().then((res) => {
+                    // console.log(res);
+                    let data = res.data;
+                    let tempArray = [];
+                    data.forEach(el => {
+                        let address = that.getRegion(el);
+                        let obj = {
+                            id: el.id,
+                            isDefault: el.isdefault.toString() === '1',
+                            name: el.name,
+                            region: address.region,
+                            area: address.area,
+                            mobile: el.phone,
+                            street: el.address
+                        };
+                        tempArray.push(obj)
+                    });
+                    this.addressData = tempArray
+                    // {
+                    //     isDefault: false,
+                    //     name: '巫浩洁',
+                    //     region: '四川省 内江市',
+                    //     area: '隆昌县',
+                    //     street: '********',
+                    //     mobile: '15282148708'
+                    // },
+                })
+            },
+            getRegion(el) {
+                let address = JSON.parse(localStorage.get('region'));
+                let region;
+                let area;
+                let provinceName;
+                let cityName;
+                address.forEach(element => {
+                    if (element.value === el.provinceid) {
+                        provinceName = element.label;
+                        if (element.children) {
+                            element.children.forEach(cityChildren => {
+                                if (cityChildren.value === el.cityid) {
+                                    cityName = cityChildren.label;
+                                    if(cityChildren.children){
+                                        cityChildren.children.forEach(areaChildren=>{
+                                            if(areaChildren.value === el.countyid){
+                                                area = areaChildren.label
+                                            }
+                                        })
+                                    }
+                                }
+                            })
+                        }
+                    }
+
+                });
+                region = provinceName + ' ' +cityName;
+
+                return {
+                    region,
+                    area
+                }
+            }
         },
     }
 </script>
@@ -167,7 +264,6 @@
                             border: 1px solid #dfdfdf;
                             padding: 30px 20px 20px;
                             position: relative;
-                            cursor: pointer;
 
                             .default {
                                 position: absolute;
@@ -245,7 +341,6 @@
                             border: 1px solid #dfdfdf;
                             padding: 30px 20px 20px;
                             position: relative;
-                            cursor: pointer;
                         }
                     }
 
