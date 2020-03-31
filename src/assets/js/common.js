@@ -445,6 +445,40 @@ export const excelExport = (data, fileName) => {
     document.body.removeChild(elink);
 };
 
+export const findCity = (citys, provinceid, cityid, countyid) => {
+    // debugger
+    let provinceName;
+    let cityName;
+    let countyName;
+    citys.forEach(proEl => {
+        if (proEl.value === provinceid) {
+            provinceName = proEl.label;
+            if (proEl.children) {
+                proEl.children.forEach(cityEl => {
+                    if (cityEl.value === cityid) {
+                        cityName = cityEl.label
+                        if (cityEl.children) {
+                            cityEl.children.forEach(countyEl => {
+                                if (countyEl.value === countyid) {
+                                    countyName = countyEl.label
+                                }
+                            })
+                        }
+                    }
+                })
+            }
+        }
+    });
+    return {
+        provinceName,
+        provinceid,
+        cityName,
+        cityid,
+        countyName,
+        countyid,
+    }
+};
+
 // export const IdentityCodeValid = (code) => {
 
 

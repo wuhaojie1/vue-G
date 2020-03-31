@@ -10,7 +10,7 @@
                         <div class="goods-name">{{item.goodsName}}</div>
                         <el-input-number v-model="item.num" :min="1" :max="10"
                                          label="描述文字" size="mini"></el-input-number>
-                        <div class="goods-price">{{item.price}}</div>
+                        <div class="goods-price">RMB {{item.price}}</div>
                     </div>
                     <div class="goods-detail-msg">
                         <div class="goods-detail-showMsg goods-detail-hoverText"
@@ -33,12 +33,20 @@
                     <div class="goods-detail-address">
                         <div class="toAddress">
                             <div class="goods-detail-address-text">送货至：</div>
-                            <el-cascader
+                            <el-select v-model="value" placeholder="请选择">
+                                <el-option
+                                        v-for="item in item.goodsAddress"
+                                        :key="item.value"
+                                        :label="item.label"
+                                        :value="item.value">
+                                </el-option>
+                            </el-select>
+                            <!--<el-cascader
                                     v-model="item.address"
                                     :options="item.goodsAddress"
                                     :props="{ expandTrigger: 'hover' }"
                                     @change="handleChange(item.address,index)">
-                            </el-cascader>
+                            </el-cascader>-->
                         </div>
                         <div class="time">
                             <svg width="24" height="24"

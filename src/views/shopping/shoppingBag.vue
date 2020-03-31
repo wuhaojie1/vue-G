@@ -43,6 +43,9 @@
     import Header from "../../components/header/header"
     // import Footer from "../../components/Footer";
     import shoppingBagCard from "../../components/shopping/shoppingBagCard";
+    import account from "../../assets/js/account/account";
+    import localStorage from "../../assets/js/localStorage";
+    import {findCity} from '../../assets/js/common'
 
     export default {
         name: "shoppingBag",
@@ -50,19 +53,9 @@
         data() {
             return {
                 money: '26,098',
-                // goodsDetailMsg: [
-                //     '2.4GHz 8 核第九代 Intel Core i9 处理器，Turbo Boost 最高可达 5.0GHz',
-                //     '64GB 2666MHz DDR4 内存',
-                //     'AMD Radeon Pro 5300M 图形处理器，配备 4GB GDDR6 显存',
-                //     '512GB 固态硬盘',
-                //     '采用原彩显示技术的 16 英寸视网膜显示屏',
-                //     '四个雷雳 3 端口',
-                //     '触控栏和触控 ID',
-                //     '背光键盘 - 中文 (拼音)',
-                //     '配件套件',
-                // ],
-
+                goodsAddressList: [],
                 value: [],
+                addresses: [],
                 /*options: [
                     {
                         value: 'zhinan',
@@ -266,71 +259,101 @@
                         }]
                     }],*/
                 goodsData: [
-                    {
-                        imgSrc: 'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/mbp16touch-space-select-201911_GEO_CN?wid=800&hei=800&fmt=jpeg&qlt=80&op_usm=0.5,1.5&fit=constrain&.v=1572654981479',
-                        goodsName: '16 英寸 MacBook Pro - 深空灰色',
-                        num: 1,
-                        price: 'RMB 17,399',
-                        showgoods: false,
-                        goodsDetail: [
-                            {
-                                goodsTitle: '硬件',
-                                goodsDetailMsg: [
-                                    '2.4GHz 8 核第九代 Intel Core i9 处理器，Turbo Boost 最高可达 5.0GHz',
-                                    '64GB 2666MHz DDR4 内存',
-                                    'AMD Radeon Pro 5300M 图形处理器，配备 4GB GDDR6 显存',
-                                    '512GB 固态硬盘',
-                                    '采用原彩显示技术的 16 英寸视网膜显示屏',
-                                    '四个雷雳 3 端口',
-                                    '触控栏和触控 ID',
-                                    '背光键盘 - 中文 (拼音)',
-                                    '配件套件',
-                                ],
-                            }
-                        ],
-                        address: '',
-                        goodsAddress: [],
-                        deliveryTime: '1-2 周发货。'
-                    },
-                    {
-                        imgSrc: 'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/mbp16touch-space-select-201911_GEO_CN?wid=800&hei=800&fmt=jpeg&qlt=80&op_usm=0.5,1.5&fit=constrain&.v=1572654981479',
-                        goodsName: '16 英寸 MacBook Pro - 深空灰色',
-                        num: 1,
-                        price: 'RMB 17,399',
-                        showgoods: false,
-                        goodsDetail: [
-                            {
-                                goodsTitle: '硬件',
-                                goodsDetailMsg: [
-                                    '2.4GHz 8 核第九代 Intel Core i9 处理器，Turbo Boost 最高可达 5.0GHz',
-                                    '64GB 2666MHz DDR4 内存',
-                                    'AMD Radeon Pro 5300M 图形处理器，配备 4GB GDDR6 显存',
-                                    '512GB 固态硬盘',
-                                    '采用原彩显示技术的 16 英寸视网膜显示屏',
-                                    '四个雷雳 3 端口',
-                                    '触控栏和触控 ID',
-                                    '背光键盘 - 中文 (拼音)',
-                                    '配件套件',
-                                ],
-                            }
-                        ],
-                        address: '',
-                        goodsAddress: [],
-                        deliveryTime: '1-2 周发货。'
-                    }
+                    // {
+                    //     imgSrc: 'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/mbp16touch-space-select-201911_GEO_CN?wid=800&hei=800&fmt=jpeg&qlt=80&op_usm=0.5,1.5&fit=constrain&.v=1572654981479',
+                    //     goodsName: '16 英寸 MacBook Pro - 深空灰色',
+                    //     num: 1,
+                    //     price: 'RMB 17,399',
+                    //     showgoods: false,
+                    //     goodsDetail: [
+                    //         {
+                    //             goodsTitle: '硬件',
+                    //             goodsDetailMsg: [
+                    //                 '2.4GHz 8 核第九代 Intel Core i9 处理器，Turbo Boost 最高可达 5.0GHz',
+                    //                 '64GB 2666MHz DDR4 内存',
+                    //                 'AMD Radeon Pro 5300M 图形处理器，配备 4GB GDDR6 显存',
+                    //                 '512GB 固态硬盘',
+                    //                 '采用原彩显示技术的 16 英寸视网膜显示屏',
+                    //                 '四个雷雳 3 端口',
+                    //                 '触控栏和触控 ID',
+                    //                 '背光键盘 - 中文 (拼音)',
+                    //                 '配件套件',
+                    //             ],
+                    //         }
+                    //     ],
+                    //     address: [],
+                    //     goodsAddress: JSON.parse(localStorage.get('region')),
+                    //     deliveryTime: '1-2 周发货。'
+                    // }
                 ],
             }
+        },
+        mounted() {
+            this.getAddressList()
         },
         methods: {
             changeGoodsStatus(item, index) {
                 this.goodsData[index].showgoods = !item.showgoods
             },
             addressChange(address, index) {
+                console.log(address);
+                console.log(index);
                 this.goodsData[index].address = address
             },
             deleteGoods(index) {
-                console.log(index)
-            }
+                // console.log(index)
+            },
+            getAddressList() {
+                let that = this;
+                let citys = JSON.parse(localStorage.get('region'));
+                account.getShippingAddress().then((res) => {
+                    let data = res.data;
+                    let tempArray = [];
+                    data.forEach(el => {
+                        let obj = findCity(citys, el.provinceid, el.cityid, el.countyid)
+                        let tempObj = {
+                            value: obj.provinceName + '-' + obj.cityName + '-' + obj.countyName,
+                            labels: [
+                                obj.provinceid,
+                                obj.cityid,
+                                obj.countyid,
+                            ]
+                        };
+                        tempArray.push(tempObj)
+                    });
+                    that.goodsAddressList = tempArray;
+                    this.getGoodsList(tempArray)
+                });
+
+            },
+            getGoodsList(goodsAddress) {
+                this.goodsData = [{
+                    imgSrc: 'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/mbp16touch-space-select-201911_GEO_CN?wid=800&hei=800&fmt=jpeg&qlt=80&op_usm=0.5,1.5&fit=constrain&.v=1572654981479',
+                    goodsName: '16 英寸 MacBook Pro - 深空灰色',
+                    num: 1,
+                    price: '17399',
+                    showgoods: false,
+                    goodsDetail: [
+                        {
+                            goodsTitle: '硬件',
+                            goodsDetailMsg: [
+                                '2.4GHz 8 核第九代 Intel Core i9 处理器，Turbo Boost 最高可达 5.0GHz',
+                                '64GB 2666MHz DDR4 内存',
+                                'AMD Radeon Pro 5300M 图形处理器，配备 4GB GDDR6 显存',
+                                '512GB 固态硬盘',
+                                '采用原彩显示技术的 16 英寸视网膜显示屏',
+                                '四个雷雳 3 端口',
+                                '触控栏和触控 ID',
+                                '背光键盘 - 中文 (拼音)',
+                                '配件套件',
+                            ],
+                        }
+                    ],
+                    address: [],
+                    goodsAddress: goodsAddress,
+                    deliveryTime: '1-2 周发货。'
+                }]
+            },
         }
     }
 </script>
