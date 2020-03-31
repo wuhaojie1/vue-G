@@ -23,6 +23,7 @@
     import Header from "../../components/header/header";
     import CategoryNavBar from "../../components/goods/collapseNavBar";
     import goodsCard from "../../components/goods/goodsCard";
+    import goods from "../../assets/js/goods/goods";
 
     export default {
         name: "goodsList",
@@ -67,65 +68,11 @@
                         ],
                     },
                 ],
-                goodsCardDates: [
-                    {
-                        imgs: [
-                            require('../../assets/img/goods/HMV72.jpg'),
-                            require('../../assets/img/goods/HMV72_AV1.jpg'),
-                            require('../../assets/img/goods/HMV72_AV2.jpg'),
-                            require('../../assets/img/goods/HMV72_AV3.jpg'),
-                            require('../../assets/img/goods/HMV72_AV4.jpg'),
-                            require('../../assets/img/goods/HMV72_AV5.jpg'),
-                            require('../../assets/img/goods/HMV72_AV6.jpg'),
-                        ],
-                        category: 'Apple HomeKit',
-                        name: 'Nanoleaf Canvas 智能奇光板',
-                        price: 'RMB 1,698',
-                    },
-                    {
-                        imgs: [
-                            require('../../assets/img/goods/HMV72.jpg'),
-                            require('../../assets/img/goods/HMV72_AV1.jpg'),
-                            require('../../assets/img/goods/HMV72_AV2.jpg'),
-                            require('../../assets/img/goods/HMV72_AV3.jpg'),
-                            require('../../assets/img/goods/HMV72_AV4.jpg'),
-                            require('../../assets/img/goods/HMV72_AV5.jpg'),
-                            require('../../assets/img/goods/HMV72_AV6.jpg'),
-                        ],
-                        category: 'Apple HomeKit',
-                        name: 'Nanoleaf Canvas 智能奇光板',
-                        price: 'RMB 1,698',
-                    },
-                    {
-                        imgs: [
-                            require('../../assets/img/goods/HMV72.jpg'),
-                            require('../../assets/img/goods/HMV72_AV1.jpg'),
-                            require('../../assets/img/goods/HMV72_AV2.jpg'),
-                            require('../../assets/img/goods/HMV72_AV3.jpg'),
-                            require('../../assets/img/goods/HMV72_AV4.jpg'),
-                            require('../../assets/img/goods/HMV72_AV5.jpg'),
-                            require('../../assets/img/goods/HMV72_AV6.jpg'),
-                        ],
-                        category: 'Apple HomeKit',
-                        name: 'Nanoleaf Canvas 智能奇光板',
-                        price: 'RMB 1,698',
-                    },
-                    {
-                        imgs: [
-                            require('../../assets/img/goods/HMV72.jpg'),
-                            require('../../assets/img/goods/HMV72_AV1.jpg'),
-                            require('../../assets/img/goods/HMV72_AV2.jpg'),
-                            require('../../assets/img/goods/HMV72_AV3.jpg'),
-                            require('../../assets/img/goods/HMV72_AV4.jpg'),
-                            require('../../assets/img/goods/HMV72_AV5.jpg'),
-                            require('../../assets/img/goods/HMV72_AV6.jpg'),
-                        ],
-                        category: 'Apple HomeKit',
-                        name: 'Nanoleaf Canvas 智能奇光板',
-                        price: 'RMB 1,698',
-                    },
-                ],
+                goodsCardDates: [],
             }
+        },
+        mounted() {
+            this.getgoodsList(this.$route.params.type)
         },
         methods: {
             toGoodsDetail(item) {
@@ -135,6 +82,32 @@
                         item: item
                     }
                 })
+            },
+            getgoodsList(type){
+                let that = this;
+                let obj = {
+                    type
+                };
+                goods.getGoodsList(obj).then(res=>{
+                    let data = res.data;
+                    let tempArray = [];
+                    data.forEach(el=>{
+                        let obj = {
+                            ...el,
+                            imgs:that.imgArray(el.imgSrc),
+                            category: el.category,
+                            name: el.goodsName,
+                            price: el.price,
+
+                        };
+                        tempArray.push(obj)
+                    });
+                    this.goodsCardDates = tempArray
+                })
+
+            },
+            imgArray(imgs){
+                return imgs.split(',')
             }
         }
     }

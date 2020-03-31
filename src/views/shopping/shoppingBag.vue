@@ -13,7 +13,7 @@
                 <shoppingBagCard
                         :goodsData="goodsData"
                         @changeGoodsStatus="changeGoodsStatus"
-                        @deleteGoods="deleteGoods"
+                        @deletegoods="deletegoods"
                         @addressChange="addressChange">
                 </shoppingBagCard>
             </div>
@@ -26,7 +26,7 @@
                     <div class="goods-freight-button">
                         <div class="goods-freight-money">
                             <div class="goods-freight-text">总计</div>
-                            <div class="goods-freight-text">RMB 25,028</div>
+                            <div class="goods-freight-text">RMB {{money}}</div>
                         </div>
                         <div class="goods-freight-elBtn">
                             <div class="btn  btn-primary settle">结账</div>
@@ -44,6 +44,7 @@
     // import Footer from "../../components/Footer";
     import shoppingBagCard from "../../components/shopping/shoppingBagCard";
     import account from "../../assets/js/account/account";
+    import shoppingBag from "../../assets/js/shoppingBag/shoppingBag";
     import localStorage from "../../assets/js/localStorage";
     import {findCity} from '../../assets/js/common'
 
@@ -52,7 +53,7 @@
         components: {shoppingBagCard, Header},
         data() {
             return {
-                money: '26,098',
+                money: '0',
                 goodsAddressList: [],
                 value: [],
                 addresses: [],
@@ -300,7 +301,16 @@
                 console.log(index);
                 this.goodsData[index].address = address
             },
-            deleteGoods(index) {
+            deletegoods(item) {
+                console.log(item)
+                let that = this;
+                let postData = {
+                    id: item.id
+                };
+                shoppingBag.deleteGoods(postData).then((res)=>{
+                    console.log(res)
+                    that.getGoodsList(that.goodsAddressList)
+                })
                 // console.log(index)
             },
             getAddressList() {
@@ -322,38 +332,63 @@
                         tempArray.push(tempObj)
                     });
                     that.goodsAddressList = tempArray;
-                    this.getGoodsList(tempArray)
+                    that.getGoodsList(tempArray)
                 });
 
             },
             getGoodsList(goodsAddress) {
-                this.goodsData = [{
-                    imgSrc: 'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/mbp16touch-space-select-201911_GEO_CN?wid=800&hei=800&fmt=jpeg&qlt=80&op_usm=0.5,1.5&fit=constrain&.v=1572654981479',
-                    goodsName: '16 英寸 MacBook Pro - 深空灰色',
-                    num: 1,
-                    price: '17399',
-                    showgoods: false,
-                    goodsDetail: [
-                        {
-                            goodsTitle: '硬件',
-                            goodsDetailMsg: [
-                                '2.4GHz 8 核第九代 Intel Core i9 处理器，Turbo Boost 最高可达 5.0GHz',
-                                '64GB 2666MHz DDR4 内存',
-                                'AMD Radeon Pro 5300M 图形处理器，配备 4GB GDDR6 显存',
-                                '512GB 固态硬盘',
-                                '采用原彩显示技术的 16 英寸视网膜显示屏',
-                                '四个雷雳 3 端口',
-                                '触控栏和触控 ID',
-                                '背光键盘 - 中文 (拼音)',
-                                '配件套件',
+                let that = this
+                shoppingBag.getGoods().then(res => {
+                    let contPrice = 0;
+                    let tempArray = [];
+                    let data = res.data;
+                    data.forEach(el => {
+                        contPrice = contPrice+el.price;
+                        let obj = {
+                            id: el.id,
+                            imgSrc: el.imgSrc,
+                            goodsName: el.goodsName,
+                            num: el.num,
+                            price: el.price,
+                            showgoods: false,
+                            goodsDetail: [
+                                {
+                                    goodsTitle:el.goodsTitle,
+                                    goodsDetailMsg:that.toArray(el.goodsDetailMsg)
+                                }
                             ],
-                        }
-                    ],
-                    address: [],
-                    goodsAddress: goodsAddress,
-                    deliveryTime: '1-2 周发货。'
-                }]
+                            address: [],
+                            goodsAddress: goodsAddress,
+                            deliveryTime: el.deliveryTime,
+                        };
+                        tempArray.push(obj)
+                    });
+                    that.goodsData = tempArray;
+                    that.money = contPrice
+
+                })
+                // this.goodsData = [{
+                //     imgSrc: 'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/mbp16touch-space-select-201911_GEO_CN?wid=800&hei=800&fmt=jpeg&qlt=80&op_usm=0.5,1.5&fit=constrain&.v=1572654981479',
+                //     goodsName: '16 英寸 MacBook Pro - 深空灰色',
+                //     num: 1,
+                //     price: '17399',
+                //     showgoods: false,
+                //     goodsDetail: [
+                //         {
+                //             goodsTitle: '硬件',
+                //             goodsDetailMsg: [
+                //                 '2.4GHz 8 核第九代 Intel Core i9 处理器，Turbo Boost 最高可达 5.0GHz', '64GB 2666MHz DDR4 内存', 'AMD Radeon Pro 5300M 图形处理器，配备 4GB GDDR6 显存', '512GB 固态硬盘', '采用原彩显示技术的 16 英寸视网膜显示屏', '四个雷雳 3 端口', '触控栏和触控 ID', '背光键盘 - 中文 (拼音)', '配件套件',
+                //             ],
+                //         }
+                //     ],
+                //     address: [],
+                //     goodsAddress: goodsAddress,
+                //     deliveryTime: '1-2 周发货。'
+                // }]
             },
+            toArray(data){
+                return data.split(',');
+            }
         }
     }
 </script>

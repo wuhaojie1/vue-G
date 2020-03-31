@@ -17,7 +17,7 @@
                              @click="changeGoodsStatus(item,index)">
                             显示产品详情
                         </div>
-                        <div class="goods-detail-del goods-detail-hoverText" @click="deleteGoods(index)">移除</div>
+                        <div class="goods-detail-del goods-detail-hoverText" @click="deletegoods(item)">移除</div>
                     </div>
                     <el-collapse-transition>
                         <div class="goods-detail-showing" v-show="item.showgoods"
@@ -86,8 +86,8 @@
                 this.$emit('changeGoodsStatus', item, index)
             },
 
-            deleteGoods(index) {
-                this.$emit('deleteGoods', index)
+            deletegoods(item) {
+                this.$emit('deletegoods', item)
             },
             handleChange(address, index) {
                 this.$emit('addressChange', address, index)

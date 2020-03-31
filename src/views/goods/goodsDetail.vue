@@ -36,7 +36,7 @@ Nanoleaf Canvas 智能奇光板在照明功能之外，更巧妙地融合了视�
                             <span>RMB 1,698</span>
                         </div>
                         <div class="contentBtn">
-                            <div class="btn  btn-primary addShoppingBag">
+                            <div class="btn  btn-primary addShoppingBag" @click="addGoods">
                                 <span>添加至购物袋</span>
                             </div>
                             <i class="el-icon-star-on" v-if="collected" @click="addCollect(collected)"></i>
@@ -57,6 +57,9 @@ Nanoleaf Canvas 智能奇光板在照明功能之外，更巧妙地融合了视�
 <script>
     import Header from '../../components/header/header'
     import ProductInfo from "../../components/goods/productInfo";
+    import shoppingBag from "../../assets/js/shoppingBag/shoppingBag";
+    import goods from "../../assets/js/goods/goods";
+
 
     export default {
         name: "goodsDetail",
@@ -79,7 +82,7 @@ Nanoleaf Canvas 智能奇光板在照明功能之外，更巧妙地融合了视�
                 ],
                 selectedImg: require('../../assets/img/goods/HMV72.jpg'),
                 collected: false,
-                productData:[
+                productData: [
                     "//openfile.meizu.com/group1/M00/07/51/Cgbj0F1nTRWAZ8_mAA212Hcm_L4635.jpg",
                     "//openfile.meizu.com/group1/M00/07/67/Cgbj0V1nM5yAeMRqAA1Vh8xpAxk552.png",
                     "//openfile.meizu.com/group1/M00/07/53/Cgbj0F1nllqAN0qPAA6Bon99Pz8465.png",
@@ -89,13 +92,35 @@ Nanoleaf Canvas 智能奇光板在照明功能之外，更巧妙地融合了视�
             }
         },
         mounted() {
-            this.getGoodsItem()
+            // console.log(this.$route.params)
+            this.getDetail()
         },
         methods: {
-            getGoodsItem() {
-                this.item = this.$route.params.item
-                // eslint-disable-next-line no-console
-                // console.log(this.item)
+            addGoods() {
+                let postData = {
+                    imgSrc:'http://localhost:8080/img/HMV72.6f535830.jpg',
+                    goodsName:'Nanoleaf Canvas 智能奇光板',
+                    num:'1',
+                    price:'1698',
+                    goodsTitle:'软件',
+                    goodsDetailMsg:'Nanoleaf Canvas 智能奇光板在照明功能之外，更巧妙地融合了视觉、听觉和触觉体验，为你带来愉悦的感官享受。这款照明系统即插即用，省时省力。它采用边光设计，内置的 Rhythm 技术支持实时音乐同步以及触控和语音控制，让你的家从智能家庭变身为智慧家庭。',
+                    provinceid:'',
+                    cityid:'',
+                    countyid:'',
+                    category:'',
+                    deliveryTime:'1-2 周发货。',
+                };
+                shoppingBag.addShoppingCart(postData).then(res => {
+                    console.log(res.data);
+                })
+            },
+            getDetail() {
+                let postData = {
+                    id: this.$route.params.item.id
+                };
+                goods.getGoodsDetail(postData).then(res=>{
+                    console.log(res.data)
+                })
             },
             imgShow(index) {
                 this.selected = index;
@@ -250,7 +275,7 @@ Nanoleaf Canvas 智能奇光板在照明功能之外，更巧妙地融合了视�
             .goodsItem-parameter {
                 width: 100%;
 
-                .customizeContent{
+                .customizeContent {
 
                 }
             }

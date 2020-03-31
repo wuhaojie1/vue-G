@@ -28,7 +28,7 @@ Router.prototype.push = function push(to) {
 };
 
 export default new Router({
-    // mode: 'history',
+    mode: 'history',
     routes: [
         {path: '/', name: 'index', component: index},//component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
         {path: '/login', name: 'login', component: login},//登录

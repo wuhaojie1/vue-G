@@ -17,14 +17,14 @@
             </div>
             <div class="goodsCard-list-description">
                 <div class="goodsCard-list-description-item">
-                    <div class="category-text">
+                    <div class="category-text" v-if="item.category">
                         <span>{{item.category}}</span>
                     </div>
                     <div class="category-name">
                         <span>{{item.name}}</span>
                     </div>
                     <div class="category-price">
-                        <span>{{item.price}}</span>
+                        <span>RMB {{item.price}}</span>
                     </div>
                 </div>
             </div>
@@ -68,7 +68,7 @@
                 .elCarousel {
                     img {
                         width: 360px;
-                        height: 360px;
+                        /*height: 360px;*/
                     }
                 }
             }
