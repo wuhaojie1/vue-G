@@ -22,18 +22,17 @@
                 </div>
                 <div class="goodsItem-msg-content">
                     <div class="content-items">
-                        <div class="content-category">
-                            <span>Apple HomeKit</span>
+                        <div class="content-category" v-if="category">
+                            <span>{{category}}</span>
                         </div>
                         <div class="content-name">
-                            <h1>Nanoleaf Canvas 智能奇光板</h1>
+                            <h1>{{goodsName}}</h1>
                         </div>
                         <div class="content-description">
-                            <span>
-Nanoleaf Canvas 智能奇光板在照明功能之外，更巧妙地融合了视觉、听觉和触觉体验，为你带来愉悦的感官享受。这款照明系统即插即用，省时省力。它采用边光设计，内置的 Rhythm 技术支持实时音乐同步以及触控和语音控制，让你的家从智能家庭变身为智慧家庭。</span>
+                            <span>{{goodsDetailMsg}}</span>
                         </div>
                         <div class="content-money">
-                            <span>RMB 1,698</span>
+                            <span>RMB {{price}}</span>
                         </div>
                         <div class="contentBtn">
                             <div class="btn  btn-primary addShoppingBag" @click="addGoods">
@@ -71,16 +70,8 @@ Nanoleaf Canvas 智能奇光板在照明功能之外，更巧妙地融合了视�
             return {
                 item: {},
                 selected: 1,
-                imgs: [
-                    require('../../assets/img/goods/HMV72.jpg'),
-                    require('../../assets/img/goods/HMV72_AV1.jpg'),
-                    require('../../assets/img/goods/HMV72_AV2.jpg'),
-                    require('../../assets/img/goods/HMV72_AV3.jpg'),
-                    require('../../assets/img/goods/HMV72_AV4.jpg'),
-                    require('../../assets/img/goods/HMV72_AV5.jpg'),
-                    require('../../assets/img/goods/HMV72_AV6.jpg'),
-                ],
-                selectedImg: require('../../assets/img/goods/HMV72.jpg'),
+                imgs: [],
+                selectedImg: '',
                 collected: false,
                 productData: [
                     "//openfile.meizu.com/group1/M00/07/51/Cgbj0F1nTRWAZ8_mAA212Hcm_L4635.jpg",
@@ -88,38 +79,63 @@ Nanoleaf Canvas 智能奇光板在照明功能之外，更巧妙地融合了视�
                     "//openfile.meizu.com/group1/M00/07/53/Cgbj0F1nllqAN0qPAA6Bon99Pz8465.png",
                     "//openfile.meizu.com/group1/M00/07/69/Cgbj0V1nlmCAYgw1AAtUWqLFiSs589.png"
                 ],
-
+                goodsName: '',
+                category: '',
+                goodsDetailMsg: '',
+                price: '',
+                goodsTitle: '',
+                goodsId: '',
             }
         },
         mounted() {
             // console.log(this.$route.params)
             this.getDetail()
         },
+        watch: {
+            imgs(v) {
+                this.selectedImg = v[0];
+            }
+        },
         methods: {
             addGoods() {
                 let postData = {
-                    imgSrc:'http://localhost:8080/img/HMV72.6f535830.jpg',
-                    goodsName:'Nanoleaf Canvas 智能奇光板',
-                    num:'1',
-                    price:'1698',
-                    goodsTitle:'软件',
-                    goodsDetailMsg:'Nanoleaf Canvas 智能奇光板在照明功能之外，更巧妙地融合了视觉、听觉和触觉体验，为你带来愉悦的感官享受。这款照明系统即插即用，省时省力。它采用边光设计，内置的 Rhythm 技术支持实时音乐同步以及触控和语音控制，让你的家从智能家庭变身为智慧家庭。',
-                    provinceid:'',
-                    cityid:'',
-                    countyid:'',
-                    category:'',
-                    deliveryTime:'1-2 周发货。',
+                    imgSrc: this.imgs[0],
+                    goodsName: this.goodsName,
+                    num: '1',
+                    price: this.price,
+                    goodsTitle: this.goodsTitle,
+                    goodsDetailMsg: this.goodsDetailMsg,
+                    // provinceid: '',
+                    // cityid: '',
+                    // countyid: '',
+                    category: this.category,
+                    deliveryTime: '1-2 周发货。',
+                    goodsId: this.goodsId,
                 };
                 shoppingBag.addShoppingCart(postData).then(res => {
-                    console.log(res.data);
+                    // console.log(res.data);
+                    if(res.data.success){
+                        this.$message({
+                            type: "success",
+                            message: '以成功添加至购物袋'
+                        })
+                    }
                 })
             },
             getDetail() {
                 let postData = {
                     id: this.$route.params.item.id
                 };
-                goods.getGoodsDetail(postData).then(res=>{
-                    console.log(res.data)
+                goods.getGoodsDetail(postData).then(res => {
+                    // console.log(res.data);
+                    let data = res.data;
+                    this.goodsName = data.goodsName;
+                    this.category = data.category ? data.category : null;
+                    this.goodsDetailMsg = data.goodsDetailMsg;
+                    this.price = data.price;
+                    this.imgs = this.getImg(data.imgSrc);
+                    this.goodsId = data.id;
+                    this.goodsTitle = data.goodsTitle;
                 })
             },
             imgShow(index) {
@@ -128,6 +144,9 @@ Nanoleaf Canvas 智能奇光板在照明功能之外，更巧妙地融合了视�
             },
             addCollect(collected) {
                 this.collected = !collected
+            },
+            getImg(data) {
+                return data.split(',')
             }
         }
     }
@@ -149,12 +168,16 @@ Nanoleaf Canvas 智能奇光板在照明功能之外，更巧妙地融合了视�
                 .goodsItem-msg-img {
                     width: 58%;
                     margin-bottom: 35px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
 
                     .img-show {
                         .img-show-item {
                             img {
                                 width: 572px;
-                                height: 572px;
+                                /*height: 572px;*/
                             }
                         }
 

@@ -47,7 +47,7 @@ const http = ({
                   url, headers, params, method, hostType, responseType
               }) => {
     // debugger
-    // let timestamp = (new Date()).valueOf();
+    let timestamp = (new Date()).valueOf();
     let prefix = '';
     switch (hostType) {
         case 'IDreader':
@@ -82,8 +82,8 @@ const http = ({
     // let requestApi = httpApi?httpApi:api
     return new Promise((resolve, reject) => {
         axios({
-            // url: `${prefix}/${url}?&&t=${timestamp}`, //
-            url: `${prefix}/${url}`, //
+            url: `${prefix}/${url}?&&t=${timestamp}`, //
+            // url: `${prefix}/${url}`, //
             headers: formatHeaders(headers),
             // data: formatParams(params),
             data: params,

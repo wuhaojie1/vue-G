@@ -8,10 +8,15 @@
                 <div class="goods-detail-summary">
                     <div class="goods-basic-msg">
                         <div class="goods-name">{{item.goodsName}}</div>
-                        <el-input-number v-model="item.num" :min="1" :max="10"
-                                         label="描述文字" size="mini"></el-input-number>
-                        <div class="goods-price">RMB {{item.price}}</div>
+                        <div class="goods-price">RMB {{item.totalPrice}}</div>
                     </div>
+                    <el-input-number v-model="item.num"
+                                     :min="1"
+                                     :max="100"
+                                     label="描述文字"
+                                     size="mini"
+                                     @change="changeNumber(item.num,index)"
+                                     class="elNumber"></el-input-number>
                     <div class="goods-detail-msg">
                         <div class="goods-detail-showMsg goods-detail-hoverText"
                              @click="changeGoodsStatus(item,index)">
@@ -30,7 +35,7 @@
                         </div>
                     </el-collapse-transition>
 
-                    <div class="goods-detail-address">
+                    <!--<div class="goods-detail-address">
                         <div class="toAddress">
                             <div class="goods-detail-address-text">送货至：</div>
                             <el-select v-model="value" placeholder="请选择">
@@ -41,12 +46,12 @@
                                         :value="item.value">
                                 </el-option>
                             </el-select>
-                            <!--<el-cascader
+                            &lt;!&ndash;<el-cascader
                                     v-model="item.address"
                                     :options="item.goodsAddress"
                                     :props="{ expandTrigger: 'hover' }"
                                     @change="handleChange(item.address,index)">
-                            </el-cascader>-->
+                            </el-cascader>&ndash;&gt;
                         </div>
                         <div class="time">
                             <svg width="24" height="24"
@@ -60,7 +65,7 @@
                         </div>
 
 
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
@@ -81,6 +86,9 @@
                 value: '',
             }
         },
+        watch:{
+            // npm
+        },
         methods: {
             changeGoodsStatus(item, index) {
                 this.$emit('changeGoodsStatus', item, index)
@@ -92,6 +100,9 @@
             handleChange(address, index) {
                 this.$emit('addressChange', address, index)
             },
+            changeNumber(value,index){
+                this.$emit('changeNumber', value,index)
+            }
         }
 
     }
@@ -107,6 +118,8 @@
         .goods-detail {
             width: 980px;
             display: flex;
+            min-height: 205px;
+            padding-bottom: 120px;
 
 
             .goods-detail-left {
@@ -125,8 +138,13 @@
 
             .goods-detail-right {
                 width: 75%;
+                /*display: flex;
+                align-items: center;*/
+
 
                 .goods-detail-summary {
+                    width: 100%;
+                    text-align:  right;
                     .goods-basic-msg {
                         display: flex;
                         justify-content: space-between;
@@ -149,6 +167,10 @@
 
                         }
 
+                    }
+
+                    .elNumber{
+                        margin-top: 10px;
                     }
 
                     .goods-detail-msg {

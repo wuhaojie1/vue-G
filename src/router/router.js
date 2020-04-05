@@ -12,6 +12,7 @@ import register from '../components/Register'
 import shoppingBag from '../views/shopping/shoppingBag'
 import account from '../views/account/account'
 import order from '../views/account/order'
+import orderDetail from '../views/account/orderDetail'
 import personal from '../views/account/personal'
 import shippingAddress from '../views/account/shippingAddress'
 import newAddress from '../views/account/newAddress'
@@ -28,7 +29,7 @@ Router.prototype.push = function push(to) {
 };
 
 export default new Router({
-    mode: 'history',
+    // mode: 'history',
     routes: [
         {path: '/', name: 'index', component: index},//component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
         {path: '/login', name: 'login', component: login},//登录
@@ -51,6 +52,7 @@ export default new Router({
                 {path: '/account/personal', name: 'personal', component: personal},
                 {path: '/account/shippingAddress', name: 'shippingAddress', component: shippingAddress},
                 {path: '/account/newAddress', name: 'newAddress', component: newAddress},
+                {path: '/account/orderDetail', name: 'orderDetail', component: orderDetail},
 
             ]
         },//账户

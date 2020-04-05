@@ -36,10 +36,38 @@ export function getGoods(data) {
     })
 }
 
+//结账
+export function billOrder(data) {
+    return axios({
+        url: 'api/order/bill',
+        method: 'post',
+        data
+    })
+}
+
+//查询订单
+export function checkOrder() {
+    return axios({
+        url: 'api/order/orderList',
+        method: 'get',
+    })
+}
+
+//根据id查询订单详情
+export function getOrderDetail(data) {
+    return axios({
+        url: 'api/order/detail',
+        method: 'post',
+        data
+    })
+}
 
 export default {
     addShoppingCart,
     deleteGoods,
     updateGoods,
     getGoods,
+    billOrder,
+    checkOrder,
+    getOrderDetail
 }

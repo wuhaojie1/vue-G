@@ -6,17 +6,53 @@
                 <div class="money">你的购物袋总计 RMB{{money}}</div>
                 <div class="transport">所有订单均可享受免费送货和退货服务。</div>
                 <div class="bill-box">
-                    <div class="btn  btn-primary bill">结账</div>
+                    <div class="btn  btn-primary bill" @click="bill">结账</div>
                 </div>
             </div>
+
             <div class="body-goods">
                 <shoppingBagCard
                         :goodsData="goodsData"
                         @changeGoodsStatus="changeGoodsStatus"
                         @deletegoods="deletegoods"
-                        @addressChange="addressChange">
+                        @changeNumber="changeNumber">
                 </shoppingBagCard>
             </div>
+
+            <div class="goods-detail-address">
+                <div class="toAddress">
+                    <div class="goods-detail-address-text">送货至：</div>
+                    <el-select v-model="value"
+                               placeholder="请选择"
+                               @change="selectAddress">
+                        <el-option
+                                v-for="item in goodsAddressList"
+                                :key="item.label"
+                                :label="item.label"
+                                :value="item.value">
+                        </el-option>
+                    </el-select>
+                    <!--<el-cascader
+                            v-model="item.address"
+                            :options="item.goodsAddress"
+                            :props="{ expandTrigger: 'hover' }"
+                            @change="handleChange(item.address,index)">
+                    </el-cascader>-->
+                </div>
+                <div class="time">
+                    <svg width="24" height="24"
+                         class="as-svgicon as-svgicon-shipping as-svgicon-16 as-svgicon-shipping16"
+                         role="img" aria-hidden="true">
+                        <path d="M12 3.31L4 7.37v8.9l8 4.43 8-4.43v-8.9l-8-4.06zm0 7.95L9.38 9.81l6.25-3.53 2.8 1.42L12 11.26zm2.56-5.53l-6.2 3.51L5.57 7.7 12 4.44l2.56 1.29zM5 8.53l6.5 3.6v7.16L5 15.68V8.53zm7.5 10.75v-7.16l6.5-3.6v7.15l-6.5 3.61z"
+                              fill="currentColor"></path>
+                        <path fill="none" d="M0 0h24v24H0z"></path>
+                    </svg>
+                    <div class="deliveryTime">{{deliveryTime}}</div>
+                </div>
+
+
+            </div>
+
             <div class="goods-settle-account">
                 <div class="goods-settle-right">
                     <div class="goods-settle-freight">
@@ -29,7 +65,7 @@
                             <div class="goods-freight-text">RMB {{money}}</div>
                         </div>
                         <div class="goods-freight-elBtn">
-                            <div class="btn  btn-primary settle">结账</div>
+                            <div class="btn  btn-primary settle" @click="bill">结账</div>
                         </div>
                         <div style="clear:both"></div>
                     </div>
@@ -55,210 +91,15 @@
             return {
                 money: '0',
                 goodsAddressList: [],
+                deliveryTime: '1-2 周发货。',
                 value: [],
+                provinceid: '',
+                cityid: '',
+                countyid: '',
+                address: '',
+                phone: '',
+                name: '',
                 addresses: [],
-                /*options: [
-                    {
-                        value: 'zhinan',
-                        label: '指南',
-                        children: [
-                        {
-                            value: 'shejiyuanze',
-                            label: '设计原则',
-                            children: [
-                            {
-                                value: 'yizhi',
-                                label: '一致'
-                            }, {
-                                value: 'fankui',
-                                label: '反馈'
-                            }, {
-                                value: 'xiaolv',
-                                label: '效率'
-                            }, {
-                                value: 'kekong',
-                                label: '可控'
-                            }]
-                        },
-                        {
-                            value: 'daohang',
-                            label: '导航',
-                            children: [{
-                                value: 'cexiangdaohang',
-                                label: '侧向导航'
-                            }, {
-                                value: 'dingbudaohang',
-                                label: '顶部导航'
-                            }]
-                        }]
-                    },
-                    {
-                        value: 'zujian',
-                        label: '组件',
-                        children: [{
-                            value: 'basic',
-                            label: 'Basic',
-                            children: [{
-                                value: 'layout',
-                                label: 'Layout 布局'
-                            }, {
-                                value: 'color',
-                                label: 'Color 色彩'
-                            }, {
-                                value: 'typography',
-                                label: 'Typography 字体'
-                            }, {
-                                value: 'icon',
-                                label: 'Icon 图标'
-                            }, {
-                                value: 'button',
-                                label: 'Button 按钮'
-                            }]
-                        }, {
-                            value: 'form',
-                            label: 'Form',
-                            children: [{
-                                value: 'radio',
-                                label: 'Radio 单选框'
-                            }, {
-                                value: 'checkbox',
-                                label: 'Checkbox 多选框'
-                            }, {
-                                value: 'input',
-                                label: 'Input 输入框'
-                            }, {
-                                value: 'input-number',
-                                label: 'InputNumber 计数器'
-                            }, {
-                                value: 'select',
-                                label: 'Select 选择器'
-                            }, {
-                                value: 'cascader',
-                                label: 'Cascader 级联选择器'
-                            }, {
-                                value: 'switch',
-                                label: 'Switch 开关'
-                            }, {
-                                value: 'slider',
-                                label: 'Slider 滑块'
-                            }, {
-                                value: 'time-picker',
-                                label: 'TimePicker 时间选择器'
-                            }, {
-                                value: 'date-picker',
-                                label: 'DatePicker 日期选择器'
-                            }, {
-                                value: 'datetime-picker',
-                                label: 'DateTimePicker 日期时间选择器'
-                            }, {
-                                value: 'upload',
-                                label: 'Upload 上传'
-                            }, {
-                                value: 'rate',
-                                label: 'Rate 评分'
-                            }, {
-                                value: 'form',
-                                label: 'Form 表单'
-                            }]
-                        },
-                            {
-                                value: 'data',
-                                label: 'Data',
-                                children: [{
-                                    value: 'table',
-                                    label: 'Table 表格'
-                                }, {
-                                    value: 'tag',
-                                    label: 'Tag 标签'
-                                }, {
-                                    value: 'progress',
-                                    label: 'Progress 进度条'
-                                }, {
-                                    value: 'tree',
-                                    label: 'Tree 树形控件'
-                                }, {
-                                    value: 'pagination',
-                                    label: 'Pagination 分页'
-                                }, {
-                                    value: 'badge',
-                                    label: 'Badge 标记'
-                                }]
-                            }, {
-                                value: 'notice',
-                                label: 'Notice',
-                                children: [{
-                                    value: 'alert',
-                                    label: 'Alert 警告'
-                                }, {
-                                    value: 'loading',
-                                    label: 'Loading 加载'
-                                }, {
-                                    value: 'message',
-                                    label: 'Message 消息提示'
-                                }, {
-                                    value: 'message-box',
-                                    label: 'MessageBox 弹框'
-                                }, {
-                                    value: 'notification',
-                                    label: 'Notification 通知'
-                                }]
-                            }, {
-                                value: 'navigation',
-                                label: 'Navigation',
-                                children: [{
-                                    value: 'menu',
-                                    label: 'NavMenu 导航菜单'
-                                }, {
-                                    value: 'tabs',
-                                    label: 'Tabs 标签页'
-                                }, {
-                                    value: 'breadcrumb',
-                                    label: 'Breadcrumb 面包屑'
-                                }, {
-                                    value: 'dropdown',
-                                    label: 'Dropdown 下拉菜单'
-                                }, {
-                                    value: 'steps',
-                                    label: 'Steps 步骤条'
-                                }]
-                            }, {
-                                value: 'others',
-                                label: 'Others',
-                                children: [{
-                                    value: 'dialog',
-                                    label: 'Dialog 对话框'
-                                }, {
-                                    value: 'tooltip',
-                                    label: 'Tooltip 文字提示'
-                                }, {
-                                    value: 'popover',
-                                    label: 'Popover 弹出框'
-                                }, {
-                                    value: 'card',
-                                    label: 'Card 卡片'
-                                }, {
-                                    value: 'carousel',
-                                    label: 'Carousel 走马灯'
-                                }, {
-                                    value: 'collapse',
-                                    label: 'Collapse 折叠面板'
-                                }]
-                            }]
-                    },
-                    {
-                        value: 'ziyuan',
-                        label: '资源',
-                        children: [{
-                            value: 'axure',
-                            label: 'Axure Components'
-                        }, {
-                            value: 'sketch',
-                            label: 'Sketch Templates'
-                        }, {
-                            value: 'jiaohu',
-                            label: '组件交互文档'
-                        }]
-                    }],*/
                 goodsData: [
                     // {
                     //     imgSrc: 'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/mbp16touch-space-select-201911_GEO_CN?wid=800&hei=800&fmt=jpeg&qlt=80&op_usm=0.5,1.5&fit=constrain&.v=1572654981479',
@@ -292,27 +133,126 @@
         mounted() {
             this.getAddressList()
         },
+        watch: {
+            // goodsData(v) {
+            //     // debugger
+            //     console.log(v)
+            // }
+        },
         methods: {
             changeGoodsStatus(item, index) {
                 this.goodsData[index].showgoods = !item.showgoods
             },
-            addressChange(address, index) {
-                console.log(address);
-                console.log(index);
-                this.goodsData[index].address = address
+
+            /* addressChange(address) {
+                 this.addresses = address
+             },*/
+
+            selectAddress(value) {
+                this.provinceid = value.provinceid;
+                this.cityid = value.cityid;
+                this.countyid = value.countyid;
+                this.address = value.address;
+                this.phone = value.phone;
+                this.name = value.name;
             },
+            bill() {
+                // debugger
+                let postData = this.getBillPostData();
+                shoppingBag.billOrder(postData).then((res) => {
+                    // console.log(res.data)
+                    if (res.data.success) {
+                        this.$message({
+                            type: "success",
+                            message: '结账成功'
+                        });
+                        this.goodsData.forEach(el => {
+                            let obj = {
+                                id: el.id
+                            };
+                            this.clearShopBag(obj)
+                        })
+
+                    }
+                })
+            },
+            //结账成功后清空购物车
+            clearShopBag(item){
+                let postData = {
+                    id: item.id
+                };
+                shoppingBag.deleteGoods(postData).then((res) => {
+                    if (res.data.success) {
+                        this.getGoodsList(this.goodsAddressList);
+                    }
+                })
+            },
+
+            getBillPostData() {
+                // debugger
+                let timestamp = (new Date()).valueOf();
+                let randomNo = Math.floor(Math.random() * 10000);
+                let id = JSON.parse(localStorage.get('userMsg')).id;
+
+                // debugger
+                let obj = {
+                    orderNo: timestamp + randomNo + id,
+                    goodsId: this.getGoodsId().id.join(','),
+                    totalPrice: this.money,
+                    goodsNumber: this.getGoodsId().num.join(','),
+                    provinceid: this.provinceid,
+                    cityid: this.cityid,
+                    countyid: this.countyid,
+                    address: this.address,
+                    phone: this.phone,//联系电话
+                    name: this.name,//收件人
+                    status: 1
+                };
+                // debugger
+                return obj
+            },
+            getGoodsId() {
+                // debugger
+                let id = [];
+                let num = [];
+                this.goodsData.forEach(el => {
+                    id.push(el.goodsId);
+                    num.push(el.num);
+                });
+                return {
+                    id,
+                    num,
+                }
+            },
+
+            //移除商品
             deletegoods(item) {
-                console.log(item)
+                // console.log(item)
                 let that = this;
                 let postData = {
                     id: item.id
                 };
-                shoppingBag.deleteGoods(postData).then((res)=>{
-                    console.log(res)
-                    that.getGoodsList(that.goodsAddressList)
+                shoppingBag.deleteGoods(postData).then((res) => {
+                    // console.log(res)
+                    if (res.data.success) {
+                        that.getGoodsList(that.goodsAddressList);
+                        this.$message({
+                            type: "success",
+                            message: '商品已移出购物袋'
+                        })
+                    } else {
+                        this.$message({
+                            type: 'fail',
+                            message: '商品删除失败'
+                        })
+                    }
+
+
                 })
                 // console.log(index)
             },
+
+
             getAddressList() {
                 let that = this;
                 let citys = JSON.parse(localStorage.get('region'));
@@ -320,74 +260,77 @@
                     let data = res.data;
                     let tempArray = [];
                     data.forEach(el => {
+                        // console.log(el)
                         let obj = findCity(citys, el.provinceid, el.cityid, el.countyid)
                         let tempObj = {
-                            value: obj.provinceName + '-' + obj.cityName + '-' + obj.countyName,
-                            labels: [
-                                obj.provinceid,
-                                obj.cityid,
-                                obj.countyid,
-                            ]
+                            label: obj.provinceName + '-' + obj.cityName + '-' + obj.countyName + '-' + el.address,
+                            value: {
+                                provinceid: obj.provinceid,
+                                cityid: obj.cityid,
+                                countyid: obj.countyid,
+                                address: el.address,
+                                name: el.name,
+                                phone: el.phone,
+                            }
+
                         };
                         tempArray.push(tempObj)
                     });
                     that.goodsAddressList = tempArray;
-                    that.getGoodsList(tempArray)
+                    that.getGoodsList()
                 });
 
             },
-            getGoodsList(goodsAddress) {
-                let that = this
+
+            getGoodsList() {
                 shoppingBag.getGoods().then(res => {
-                    let contPrice = 0;
                     let tempArray = [];
                     let data = res.data;
                     data.forEach(el => {
-                        contPrice = contPrice+el.price;
+                        // contPrice = contPrice+el.price;
                         let obj = {
                             id: el.id,
                             imgSrc: el.imgSrc,
                             goodsName: el.goodsName,
                             num: el.num,
                             price: el.price,
+                            totalPrice: el.num * el.price,
                             showgoods: false,
+                            goodsId: el.goodsId,
                             goodsDetail: [
                                 {
-                                    goodsTitle:el.goodsTitle,
-                                    goodsDetailMsg:that.toArray(el.goodsDetailMsg)
+                                    goodsTitle: el.goodsTitle,
+                                    goodsDetailMsg: this.toArray(el.goodsDetailMsg)
                                 }
                             ],
                             address: [],
-                            goodsAddress: goodsAddress,
+                            // goodsAddress: goodsAddress,
                             deliveryTime: el.deliveryTime,
                         };
                         tempArray.push(obj)
                     });
-                    that.goodsData = tempArray;
-                    that.money = contPrice
-
+                    this.goodsData = tempArray;
+                    this.countMoney()
                 })
-                // this.goodsData = [{
-                //     imgSrc: 'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/mbp16touch-space-select-201911_GEO_CN?wid=800&hei=800&fmt=jpeg&qlt=80&op_usm=0.5,1.5&fit=constrain&.v=1572654981479',
-                //     goodsName: '16 英寸 MacBook Pro - 深空灰色',
-                //     num: 1,
-                //     price: '17399',
-                //     showgoods: false,
-                //     goodsDetail: [
-                //         {
-                //             goodsTitle: '硬件',
-                //             goodsDetailMsg: [
-                //                 '2.4GHz 8 核第九代 Intel Core i9 处理器，Turbo Boost 最高可达 5.0GHz', '64GB 2666MHz DDR4 内存', 'AMD Radeon Pro 5300M 图形处理器，配备 4GB GDDR6 显存', '512GB 固态硬盘', '采用原彩显示技术的 16 英寸视网膜显示屏', '四个雷雳 3 端口', '触控栏和触控 ID', '背光键盘 - 中文 (拼音)', '配件套件',
-                //             ],
-                //         }
-                //     ],
-                //     address: [],
-                //     goodsAddress: goodsAddress,
-                //     deliveryTime: '1-2 周发货。'
-                // }]
+
             },
-            toArray(data){
+
+            countMoney() {
+                let tempMoney = 0;
+                this.goodsData.forEach(el => {
+                    tempMoney += el.totalPrice;
+                });
+                this.money = tempMoney;
+            },
+            toArray(data) {
                 return data.split(',');
+            },
+            changeNumber(value, index) {
+                // debugger
+                this.goodsData[index].num = value;
+                this.goodsData[index].totalPrice = value * this.goodsData[index].price
+                this.countMoney()
+
             }
         }
     }
@@ -608,6 +551,38 @@
 
                     }
                 }
+            }
+
+            .goods-detail-address {
+                margin-top: 21px;
+                padding-top: 21px;
+                border-top: 1px solid #d6d6d6;
+                padding-bottom: 70px;
+
+                .toAddress {
+                    display: flex;
+                    padding: 18px 0;
+
+                    .goods-detail-address-text {
+                        text-align: left;
+                        line-height: 40px;
+                    }
+                }
+
+                .time {
+                    display: flex;
+
+                    .deliveryTime {
+                        line-height: 24px;
+                    }
+
+                }
+
+
+                /*.goods-detail-freight-text{
+                    display: flex;
+                    justify-content: space-between;
+                }*/
             }
 
             .goods-settle-account {
