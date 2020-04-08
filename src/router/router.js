@@ -19,6 +19,7 @@ import newAddress from '../views/account/newAddress'
 import goodsList from '../views/goods/goodsList'
 import goodsDetail from '../views/goods/goodsDetail'
 import conceptProducts from '../views/conceptProducts/index'
+import onePlus7TPro from '../views/conceptProducts/onePlus7TPro'
 
 
 Vue.use(Router);
@@ -59,6 +60,7 @@ export default new Router({
         {path: '/goodsList', name: 'goodsList', component: goodsList},//商品列表
         {path: '/goodsDetail', name: 'goodsDetail', component: goodsDetail},//商品列表
         {path: '/conceptProducts', name: 'conceptProducts', component: conceptProducts},//概念产品
+        {path: '/onePlus7TPro', name: 'onePlus7TPro', component: onePlus7TPro},//概念产品
         // {path: '/shoppingCart', name: 'shoppingCart', component: shoppingCart},
     ]
 })
