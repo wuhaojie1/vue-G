@@ -9,6 +9,7 @@ import register from '../components/Register'
 // import Comment from './components/Comment'
 // import Standard from './components/Standard'
 // import shoppingCart from './views/shoppingCart'
+import release from '../views/release'
 import shoppingBag from '../views/shopping/shoppingBag'
 import account from '../views/account/account'
 import order from '../views/account/order'
@@ -35,6 +36,7 @@ export default new Router({
         {path: '/', name: 'index', component: index},//component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
         {path: '/login', name: 'login', component: login},//登录
         {path: '/register', name: 'register', component: register},//注册
+        {path: '/release', name: 'release', component: release},//注册
         // {path: '/TwoDetail', name: 'TwoDetail', component: TwoDetail},
         /*{
             path: '/ThirdDetail', name: 'ThirdDetail', component: ThirdDetail,

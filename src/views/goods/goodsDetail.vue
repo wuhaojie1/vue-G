@@ -128,7 +128,8 @@
                 };
                 goods.getGoodsDetail(postData).then(res => {
                     // console.log(res.data);
-                    let data = res.data;
+                    // debugger
+                    let data = res.data.data;
                     this.goodsName = data.goodsName;
                     this.category = data.category ? data.category : null;
                     this.goodsDetailMsg = data.goodsDetailMsg;
@@ -147,6 +148,7 @@
             },
             getImg(data) {
                 return data.split(',')
+                //
             }
         }
     }
